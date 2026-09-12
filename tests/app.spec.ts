@@ -14,7 +14,7 @@ async function finishSession(page: Page) {
   await page.getByRole('button', { name: 'Wracam do mojej przygody' }).click();
 }
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
 });
 test('completes a reading session and persists progress and favorites', async ({ page }) => {
   await startFirstLesson(page);
@@ -243,4 +243,34 @@ test('reset requires an explicit choice and then clears only the app data', asyn
   await page.getByRole('button', { name: 'Usuń dane', exact: true }).click();
   await page.reload();
   await expect(page.getByRole('heading', { name: /Cześć, odkrywco/ })).toBeVisible();
+});
+
+test('PWA assets and worker stay inside the deployment path', async ({ page, request }) => {
+  const baseURL = new URL('./', page.url());
+  const links = await page
+    .locator('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]')
+    .evaluateAll((elements) => elements.map((element) => (element as HTMLLinkElement).href));
+  for (const link of links) {
+    expect(link.startsWith(baseURL.href)).toBe(true);
+    expect((await request.get(link)).ok()).toBe(true);
+  }
+  const manifestURL = await page
+    .locator('link[rel="manifest"]')
+    .evaluate((element) => (element as HTMLLinkElement).href);
+  const manifest = await (await request.get(manifestURL)).json();
+  for (const key of ['id', 'scope', 'start_url'])
+    expect(new URL(manifest[key], manifestURL).href).toBe(baseURL.href);
+  for (const icon of manifest.icons) {
+    const iconURL = new URL(icon.src, manifestURL).href;
+    expect(iconURL.startsWith(baseURL.href)).toBe(true);
+    const response = await request.get(iconURL);
+    expect(response.ok()).toBe(true);
+    expect(response.headers()['content-type']).toContain('image/png');
+  }
+  const worker = await page.evaluate(async () => {
+    const registration = await navigator.serviceWorker.ready;
+    return { scope: registration.scope, scriptURL: registration.active?.scriptURL };
+  });
+  expect(worker.scope).toBe(baseURL.href);
+  expect(worker.scriptURL).toBe(new URL('sw.js', baseURL).href);
 });

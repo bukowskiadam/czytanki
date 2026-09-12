@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+const baseURL = `http://127.0.0.1:4187${process.env.VITE_BASE_PATH || '/'}`;
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -6,7 +7,7 @@ export default defineConfig({
   timeout: 30000,
   expect: { timeout: 7000 },
   reporter: [['list']],
-  use: { baseURL: 'http://127.0.0.1:4187', trace: 'retain-on-failure' },
+  use: { baseURL, trace: 'retain-on-failure' },
   projects: [
     {
       name: 'desktop',
@@ -16,7 +17,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'npm run build && npm run preview -- --port 4187 --strictPort',
-    url: 'http://127.0.0.1:4187',
+    url: baseURL,
     reuseExistingServer: false,
     timeout: 120000,
   },

@@ -24,6 +24,31 @@ Open `http://localhost:5180`. Publish the contents of `dist/` to any static host
 
 The build generates a content-versioned service worker and caches all reading content, illustrations, fonts and icons. After the first successful load, the application can reopen offline, including levels not previously visited. Updates activate once older application tabs close. Polish speech is supplied by the device; some voices require a network connection or an installed Polish language pack.
 
+## GitHub Pages
+
+The live site is **https://bukowskiadam.github.io/czytanki/**.
+
+The workflow in `.github/workflows/deploy.yml` runs on every push to `master` and can also be started from the repository's Actions tab. It uses Node.js 24, installs the locked dependencies, checks formatting and unit tests, then builds and tests the production app in desktop and mobile Chromium before deploying `dist/` with the official GitHub Pages actions. Deployment permissions are limited to the deploy job; no personal access token or deployment secret is required.
+
+The repository's **Settings → Pages → Source** must be **GitHub Actions**. The workflow reads the base path from GitHub Pages metadata, so production assets, installed app shortcuts and the offline cache stay inside `/czytanki/`. Each deployment path has its own cache namespace.
+
+To reproduce the Pages build and browser checks locally:
+
+```sh
+VITE_BASE_PATH=/czytanki/ npm run test:e2e
+```
+
+For a manual preview:
+
+```sh
+VITE_BASE_PATH=/czytanki/ npm run build
+VITE_BASE_PATH=/czytanki/ npm run preview -- --port 5180
+```
+
+Open `http://localhost:5180/czytanki/`. Omit `VITE_BASE_PATH` to keep the default local app at `/`.
+
+Workflow details follow the [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) and [Vite deployment guide](https://vite.dev/guide/static-deploy.html#github-pages).
+
 ## Included
 
 - Six freely accessible levels, 24 lessons, 144 original Polish reading cards.

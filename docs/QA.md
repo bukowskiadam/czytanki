@@ -24,3 +24,13 @@ Verified on 2026-09-12.
 ## Practical boundaries
 
 Browser emulation does not replace testing on every physical phone or tablet. Polish speech requests are tested with a controlled speech adapter; the voice quality and offline availability depend on the user's operating system and installed Polish voice. Offline installation requires HTTPS or localhost and an initial successful online load. Progress belongs to one browser and is not synchronized across devices.
+
+## GitHub Pages deployment
+
+- Remote: `git@github.com:bukowskiadam/czytanki.git`; default branch: `master`.
+- Pages URL: https://bukowskiadam.github.io/czytanki/.
+- Pages publishing source: GitHub Actions.
+- Added deployment-path coverage for the manifest, icons, application scope and service worker URL.
+- The complete 28-test browser suite passes with `VITE_BASE_PATH=/czytanki/`, including reopening offline on both desktop and mobile.
+- Unit tests: 10 passed. Formatting check passed.
+- The workflow validates the actual Pages base path before uploading the production artifact.
