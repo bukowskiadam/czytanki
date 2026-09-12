@@ -92,3 +92,20 @@ export function getStreak(activity: Record<string, number>, now = new Date()): n
   }
   return count;
 }
+
+export function getLongestStreak(activity: Record<string, number>): number {
+  const dates = Object.keys(activity)
+    .filter((key) => activity[key] > 0)
+    .sort();
+  let longest = 0;
+  let current = 0;
+  let previous = '';
+  for (const key of dates) {
+    const dayBefore = new Date(`${key}T12:00:00`);
+    dayBefore.setDate(dayBefore.getDate() - 1);
+    current = dateKey(dayBefore) === previous ? current + 1 : 1;
+    longest = Math.max(longest, current);
+    previous = key;
+  }
+  return longest;
+}

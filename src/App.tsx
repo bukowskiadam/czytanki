@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { polishPlural, cardCount } from './format';
 import { allCards, allLessons, levels, type Level, type ReadingCard } from './data';
 import {
   completeLesson,
   dateKey,
   defaultProgress,
   getStreak,
+  getLongestStreak,
   parseProgress,
   STORAGE_KEY,
   type Progress,
@@ -71,6 +73,7 @@ export default function App() {
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
   const navigate = (next: Page) => {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     setPage(next);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
@@ -244,7 +247,7 @@ export default function App() {
             <span className="stat-chip stars" title="Gwiazdki za ukończone sesje">
               <Icon name="star" size={19} />
               <strong>{starCount}</strong>
-              <span>gwiazdek</span>
+              <span>{polishPlural(starCount, ['gwiazdka', 'gwiazdki', 'gwiazdek'])}</span>
             </span>
             <span className="stat-chip streak" title="Kolejne dni wspólnego czytania">
               <Icon name="flame" size={19} />
@@ -803,7 +806,7 @@ function ProgressPage({
       name: 'Mały odkrywca',
       description: 'Czytaj przez 3 dni z rzędu',
       icon: 'flame' as const,
-      unlocked: streak >= 3,
+      unlocked: getLongestStreak(progress.activity) >= 3,
       color: 'lavender',
     },
     {
@@ -869,7 +872,7 @@ function ProgressPage({
                 {progress.activity[day.key] ? <Icon name="check" size={23} /> : day.date}
               </div>
               <small>
-                {progress.activity[day.key] ? `${progress.activity[day.key]} kart` : '—'}
+                {progress.activity[day.key] ? cardCount(progress.activity[day.key]) : '—'}
               </small>
             </div>
           ))}

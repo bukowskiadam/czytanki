@@ -33,7 +33,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(fetch(event.request).then(response => response.ok ? response : caches.match('/index.html')).catch(() => caches.match('/index.html')));
     return;
   }
-  event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request)));
+  event.respondWith(caches.open(CACHE_NAME).then(cache => cache.match(event.request, { ignoreVary: true })).then(cached => cached || fetch(event.request)));
 });
 `,
 );

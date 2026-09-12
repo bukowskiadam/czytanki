@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { cardCount } from '../format';
 import { allCards, type ReadingCard } from '../data';
 import type { Settings } from '../storage';
 import { Icon } from './Icon';
@@ -220,7 +221,7 @@ export function ReadingSession({
           <span className="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</span>
           <h1>Pięknie ci poszło!</h1>
           <p>
-            {session.cards.length === 1 ? 'Jedna karta' : `${session.cards.length} kart`} i mnóstwo
+            {session.cards.length === 1 ? 'Jedna karta' : cardCount(session.cards.length)} i mnóstwo
             powodów do dumy.
             <br />
             Leo cieszy się, że czytacie razem.

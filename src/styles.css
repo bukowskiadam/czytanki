@@ -171,7 +171,7 @@ button:active:not(:disabled) {
   font-size: 13px;
   font-weight: 500;
   text-align: left;
-  color: #747d73;
+  color: #64705d;
   position: relative;
 }
 .nav-item:hover {
@@ -1391,7 +1391,7 @@ button:active:not(:disabled) {
 }
 .week-activity > div {
   text-align: center;
-  color: #939c87;
+  color: #5d6854;
   font-size: 11px;
 }
 .day-circle {
@@ -3274,7 +3274,7 @@ button:active:not(:disabled) {
   --muted: #6c7665;
 }
 .primary-button {
-  background: #b96247;
+  background: #b35c43;
   box-shadow: 0 3px 0 #9d5039;
 }
 .primary-button:hover {
@@ -3321,7 +3321,7 @@ button:active:not(:disabled) {
 .exit-dialog p,
 .install-copy,
 .reset-link {
-  color: #6d7763;
+  color: #5d6854;
 }
 .gentle-pill,
 .session-count {
@@ -3330,34 +3330,34 @@ button:active:not(:disabled) {
 .eyebrow,
 .hero .eyebrow,
 .level-number {
-  color: #62774f;
+  color: #52673f;
 }
 .peach .level-number {
-  color: #8e663e;
+  color: #805834;
 }
 .lavender .level-number {
-  color: #79628f;
+  color: #69527f;
 }
 .sky .level-number {
-  color: #507586;
+  color: #446573;
 }
 .rose .level-number {
-  color: #a0685b;
+  color: #8d574a;
 }
 .sand .level-number {
-  color: #847036;
+  color: #76612e;
 }
 .subtle-count {
-  color: #6b755f;
+  color: #59644d;
 }
 .daily-card .eyebrow {
-  color: #8a7745;
+  color: #7a6735;
 }
 .parent-tip .text-button {
   color: #536b40;
 }
 .bottom-nav button {
-  color: #707963;
+  color: #5d6854;
 }
 .filter-button,
 .level-filters button,
@@ -3399,7 +3399,7 @@ button:active:not(:disabled) {
   color: #596b47;
 }
 .page-footer {
-  color: #6d7763;
+  color: #5d6854;
 }
 .reading-controls button:disabled {
   opacity: 0.5;
@@ -3421,4 +3421,51 @@ button:active:not(:disabled) {
 }
 .storage-warning {
   color: #735a26;
+}
+
+/* Active controls and reading helpers meet normal-text contrast. */
+.nav-item,
+.parent-nav {
+  color: #5e6d55;
+}
+.leo-caption {
+  color: #536346;
+}
+.bottom-nav button.active {
+  color: #506b3a;
+}
+.listen-button {
+  color: #506b3d;
+}
+.hint-revealed p {
+  color: #5e6f50;
+}
+.pill.peach {
+  color: #81532c;
+}
+.level-dialog-intro p,
+.level-dialog-intro .eyebrow {
+  color: #596b4b;
+}
+.lesson-number {
+  color: #5d7448;
+}
+.lesson-number.done {
+  color: #506c38;
+}
+.setting-row select {
+  color: #546849;
+}
+.info-note {
+  color: #596d45;
+}
+.badge-card > span,
+.unlocked > span {
+  color: #75602a;
+}
+.today > span {
+  color: #546d3f;
+}
+.day-circle.completed {
+  color: #506b39;
 }
