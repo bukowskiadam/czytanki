@@ -276,7 +276,7 @@ export default function App() {
                   </h1>
                   <p>Dobry dzień na kolejną małą przygodę.</p>
                 </div>
-                <span className="gentle-pill">
+                <span className="context-note">
                   <Icon name="leaf" size={15} /> W twoim tempie
                 </span>
               </div>
@@ -291,9 +291,7 @@ export default function App() {
                     zaczyna się <em>od słowa.</em>
                   </h2>
                   <p>
-                    Czytaj, odkrywaj i rośnij razem z Leo.
-                    <br />
-                    Każde słowo to początek pięknej historii.
+                    Czytaj, odkrywaj i rośnij razem z Leo. Każde słowo to początek pięknej historii.
                   </p>
                   <button className="primary-button" onClick={startNext}>
                     {progress.completed.length ? 'Czytamy dalej' : 'Zaczynamy przygodę'}
@@ -888,7 +886,7 @@ function ProgressPage({
             <h2>Chwile z czytaniem</h2>
             <p>Nie musisz czytać codziennie, żeby robić postępy.</p>
           </div>
-          <span className="gentle-pill">Ostatnie 7 dni</span>
+          <span className="context-note">Ostatnie 7 dni</span>
         </div>
         <div className="week-activity">
           {days.map((day) => (

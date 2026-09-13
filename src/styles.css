@@ -23,12 +23,23 @@
   --muted: #7b8279;
   --border: #e6e9e1;
   --heading: 'Nunito', sans-serif;
+  --text-caption: 0.875rem;
+  --text-small: 1rem;
+  --text-body: 1.125rem;
+  --text-emphasis: 1.25rem;
+  --text-card-title: 1.5rem;
+  --text-section: 1.75rem;
+  --text-heading: 2.125rem;
+  --text-display: 2.5rem;
+  --text-large: 3rem;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
 }
 button,
 input,
@@ -75,20 +86,20 @@ h1,
 h2,
 h3 {
   font-family: var(--heading);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
 h1 {
-  font-size: 32px;
+  font-size: var(--text-display);
   line-height: 1.2;
   font-weight: 800;
 }
 h2 {
-  font-size: 24px;
+  font-size: var(--text-section);
   line-height: 1.3;
   font-weight: 800;
 }
 h3 {
-  font-size: 19px;
+  font-size: var(--text-card-title);
   line-height: 1.35;
   font-weight: 800;
 }
@@ -132,7 +143,7 @@ button:active:not(:disabled) {
   gap: 9px;
   font-family: var(--heading);
   font-weight: 900;
-  font-size: 34px;
+  font-size: var(--text-display);
   letter-spacing: -1.5px;
   padding: 0 12px;
   color: #365c48;
@@ -150,7 +161,7 @@ button:active:not(:disabled) {
   color: var(--orange);
 }
 .sidebar-label {
-  font-size: 8px;
+  font-size: var(--text-caption);
   font-weight: 700;
   letter-spacing: 1.5px;
   color: #90958b;
@@ -168,7 +179,7 @@ button:active:not(:disabled) {
   min-height: 49px;
   padding: 0 15px;
   border-radius: 11px;
-  font-size: 13px;
+  font-size: var(--text-body);
   font-weight: 500;
   text-align: left;
   color: #64705d;
@@ -207,14 +218,14 @@ button:active:not(:disabled) {
 }
 .goal-heading strong {
   font-family: var(--heading);
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.4;
 }
 .small-icon {
   color: #b69e4c;
 }
 .daily-goal p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #818473;
   line-height: 1.6;
   margin: 9px 0 15px;
@@ -235,12 +246,12 @@ button:active:not(:disabled) {
 .goal-caption {
   display: flex;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: #858876;
   margin-top: 8px;
 }
 .goal-caption strong {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: #677658;
 }
 .parent-nav {
@@ -249,7 +260,7 @@ button:active:not(:disabled) {
   display: flex;
   align-items: center;
   gap: 11px;
-  font-size: 12px;
+  font-size: var(--text-body);
   padding: 13px 9px;
   color: #788173;
 }
@@ -260,7 +271,7 @@ button:active:not(:disabled) {
   border-top: 1px solid var(--border);
   margin-top: 13px;
   padding-top: 21px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,7 +300,7 @@ button:active:not(:disabled) {
   display: flex;
   gap: 13px;
   align-items: center;
-  font-size: 11px;
+  font-size: var(--text-body);
   color: #91958b;
 }
 .breadcrumb strong {
@@ -305,12 +316,12 @@ button:active:not(:disabled) {
   display: flex;
   gap: 6px;
   align-items: center;
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding: 8px 11px;
   border-radius: 9px;
 }
 .stat-chip strong {
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 .stars {
   background: #faf3dc;
@@ -357,31 +368,29 @@ button:active:not(:disabled) {
   margin-bottom: 26px;
 }
 .greeting h1 {
-  font-size: 29px;
+  font-size: var(--text-heading);
 }
 .greeting p {
   margin-top: 7px;
-  font-size: 12px;
+  font-size: var(--text-body);
   color: var(--muted);
 }
 .greeting-sun {
   display: inline-block;
-  font-size: 35px;
+  font-size: var(--text-display);
   font-weight: 400;
   color: #d2ae61;
   vertical-align: -2px;
   margin-left: 6px;
 }
-.gentle-pill {
+.context-note {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #839175;
-  background: #f0f3e9;
-  padding: 7px 11px;
-  border-radius: 20px;
-  white-space: nowrap;
+  padding: 0;
+  white-space: normal;
 }
 .hero {
   background: #eef2e7;
@@ -399,7 +408,7 @@ button:active:not(:disabled) {
   padding: 34px 0 25px 33px;
 }
 .eyebrow {
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 700;
   letter-spacing: 1.7px;
   color: #80916b;
@@ -415,7 +424,7 @@ button:active:not(:disabled) {
   background: #849969;
 }
 .hero h2 {
-  font-size: clamp(31px, 3.1vw, 48px);
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
   line-height: 1.19;
   letter-spacing: -1.9px;
   margin: 15px 0 12px;
@@ -429,7 +438,7 @@ button:active:not(:disabled) {
 }
 .hero-copy > p {
   color: #7a8471;
-  font-size: 12px;
+  font-size: var(--text-body);
   line-height: 1.85;
   margin-bottom: 23px;
 }
@@ -444,7 +453,7 @@ button:active:not(:disabled) {
   background: #d77f60;
   color: white;
   font-weight: 600;
-  font-size: 12px;
+  font-size: var(--text-body);
   box-shadow: 0 3px 0 #bd6f54;
 }
 .primary-button:hover {
@@ -460,7 +469,7 @@ button:active:not(:disabled) {
   align-items: center;
   gap: 10px;
   margin-top: 20px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: #8b927f;
 }
 .mini-avatars {
@@ -475,7 +484,7 @@ button:active:not(:disabled) {
   height: 25px;
   display: grid;
   place-items: center;
-  font-size: 13px;
+  font-size: var(--text-body);
   margin-left: -4px;
 }
 .mini-avatars > span:nth-child(2) {
@@ -503,7 +512,7 @@ button:active:not(:disabled) {
   position: absolute;
   bottom: 13px;
   left: 35%;
-  font-size: 11px;
+  font-size: var(--text-body);
   transform: rotate(-4deg);
   color: #718163;
   font-family: var(--heading);
@@ -527,20 +536,20 @@ button:active:not(:disabled) {
   margin-bottom: 18px;
 }
 .section-heading h2 {
-  font-size: 21px;
+  font-size: var(--text-section);
   display: flex;
   align-items: center;
   gap: 11px;
 }
 .section-heading p {
   color: #909486;
-  font-size: 11px;
+  font-size: var(--text-body);
   line-height: 1.7;
   margin-top: 5px;
 }
 .subtle-count {
   font-family: 'DM Sans', sans-serif;
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 0;
   font-weight: 500;
   background: #edeee7;
@@ -554,7 +563,7 @@ button:active:not(:disabled) {
   justify-content: center;
   gap: 8px;
   padding: 8px 0;
-  font-size: 11px;
+  font-size: var(--text-body);
   font-weight: 600;
   color: #6a7b59;
   white-space: nowrap;
@@ -636,7 +645,7 @@ button:active:not(:disabled) {
   border-radius: 14px;
 }
 .level-number {
-  font-size: 8px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 1.2px;
   color: var(--accent);
@@ -647,12 +656,12 @@ button:active:not(:disabled) {
   opacity: 0.75;
 }
 .level-card h3 {
-  font-size: 19px;
+  font-size: var(--text-card-title);
   letter-spacing: -0.55px;
   color: #485345;
 }
 .level-card > p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.7;
   color: #8b8b80;
   margin-top: 4px;
@@ -664,7 +673,7 @@ button:active:not(:disabled) {
   gap: 6px;
   margin-top: 17px;
   color: #8a9181;
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .level-segments {
   display: flex;
@@ -699,24 +708,24 @@ button:active:not(:disabled) {
   overflow: hidden;
 }
 .daily-illustration {
-  font-size: 55px;
+  font-size: 3.9375rem;
   line-height: 1;
   color: #dbbd75;
   transform: rotate(-15deg);
   font-family: serif;
 }
 .daily-card .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: #a69a70;
   letter-spacing: 1.1px;
 }
 .daily-card h3 {
-  font-size: 18px;
+  font-size: var(--text-card-title);
   letter-spacing: -0.5px;
   margin-top: 5px;
 }
 .daily-card p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #929284;
   margin-top: 5px;
 }
@@ -754,16 +763,16 @@ button:active:not(:disabled) {
   place-items: center;
 }
 .parent-tip h3 {
-  font-size: 15px;
+  font-size: var(--text-emphasis);
 }
 .parent-tip p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #88907c;
   margin-top: 5px;
   line-height: 1.6;
 }
 .parent-tip .text-button {
-  font-size: 10px;
+  font-size: var(--text-caption);
   margin-top: 2px;
   min-height: 26px;
 }
@@ -775,7 +784,7 @@ button:active:not(:disabled) {
   margin-top: 32px;
   padding: 20px 0 24px;
   color: #a0a590;
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .page-footer > span,
 .page-footer > button {
@@ -785,7 +794,7 @@ button:active:not(:disabled) {
 }
 .page-footer > button {
   color: #8d967f;
-  font-size: 9px;
+  font-size: var(--text-caption);
   min-height: 30px;
 }
 .bottom-nav,
@@ -796,11 +805,11 @@ button:active:not(:disabled) {
   padding: 14px 0 28px;
 }
 .page-intro h1 {
-  font-size: 35px;
+  font-size: var(--text-display);
   margin-top: 11px;
 }
 .page-intro > p {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.8;
   color: #838b7e;
   max-width: 650px;
@@ -820,17 +829,17 @@ button:active:not(:disabled) {
   height: 55px;
 }
 .detailed h3 {
-  font-size: 24px;
+  font-size: var(--text-section);
 }
 .detailed > p {
-  font-size: 12px;
+  font-size: var(--text-body);
   line-height: 1.85;
   min-height: 67px;
   margin-top: 9px;
 }
 .detailed .level-card-bottom {
   margin-top: 25px;
-  font-size: 11px;
+  font-size: var(--text-body);
 }
 .info-note {
   display: flex;
@@ -842,7 +851,7 @@ button:active:not(:disabled) {
   margin-top: 26px;
 }
 .info-note p {
-  font-size: 12px;
+  font-size: var(--text-body);
   line-height: 1.8;
 }
 .modal-backdrop {
@@ -880,7 +889,7 @@ button:active:not(:disabled) {
   margin-bottom: 23px;
 }
 .dialog-header h2 {
-  font-size: 27px;
+  font-size: var(--text-heading);
 }
 .icon-button {
   display: inline-flex;
@@ -914,7 +923,7 @@ button:active:not(:disabled) {
   color: var(--accent);
 }
 .level-dialog-intro p {
-  font-size: 13px;
+  font-size: var(--text-body);
   color: #6e7966;
   line-height: 1.7;
   margin-top: 5px;
@@ -954,12 +963,12 @@ button:active:not(:disabled) {
   color: #73905e;
 }
 .lesson-row strong {
-  font-size: 14px;
+  font-size: var(--text-emphasis);
   font-weight: 600;
 }
 .lesson-row small {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #8f9687;
   margin-top: 5px;
 }
@@ -973,7 +982,7 @@ button:active:not(:disabled) {
   justify-content: center;
   gap: 7px;
   color: #909b84;
-  font-size: 11px;
+  font-size: var(--text-body);
   margin-top: 21px;
 }
 .parent-intro {
@@ -986,7 +995,7 @@ button:active:not(:disabled) {
   margin-bottom: 24px;
 }
 .parent-intro p {
-  font-size: 12px;
+  font-size: var(--text-body);
   line-height: 1.8;
   color: #7e8c70;
 }
@@ -995,11 +1004,11 @@ button:active:not(:disabled) {
   color: #5b7150;
 }
 .settings-content h3 {
-  font-size: 20px;
+  font-size: var(--text-card-title);
   margin: 24px 0 18px;
 }
 .setting-label {
-  font-size: 12px;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 .setting-label span {
@@ -1012,7 +1021,7 @@ button:active:not(:disabled) {
   border-radius: 9px;
   background: white;
   padding: 12px 13px;
-  font-size: 13px;
+  font-size: var(--text-body);
   margin: 9px 0 15px;
   min-height: 44px;
 }
@@ -1026,12 +1035,12 @@ button:active:not(:disabled) {
   padding: 13px 0;
 }
 .setting-row strong {
-  font-size: 12px;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 .setting-row small {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #8e9684;
   line-height: 1.6;
   margin-top: 4px;
@@ -1071,13 +1080,13 @@ button:active:not(:disabled) {
   border-radius: 8px;
   background: #f9faf4;
   padding: 10px 8px;
-  font-size: 11px;
+  font-size: var(--text-body);
   max-width: 155px;
   min-height: 42px;
 }
 .parent-tips {
   padding-left: 21px;
-  font-size: 12px;
+  font-size: var(--text-body);
   line-height: 1.9;
   color: #7a8471;
 }
@@ -1090,7 +1099,7 @@ button:active:not(:disabled) {
   font-weight: 700;
 }
 .research-note {
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.8;
   color: #969c8c;
 }
@@ -1111,7 +1120,7 @@ button:active:not(:disabled) {
   color: #8a957f;
 }
 .privacy-note p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.8;
 }
 .reset-link {
@@ -1120,7 +1129,7 @@ button:active:not(:disabled) {
   align-items: center;
   margin-top: 17px;
   min-height: 44px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #a08778;
 }
 .reset-confirm {
@@ -1131,10 +1140,10 @@ button:active:not(:disabled) {
   padding: 16px;
 }
 .reset-confirm strong {
-  font-size: 12px;
+  font-size: var(--text-body);
 }
 .reset-confirm p {
-  font-size: 11px;
+  font-size: var(--text-body);
   margin-top: 7px;
 }
 .reset-confirm > div {
@@ -1147,7 +1156,7 @@ button:active:not(:disabled) {
   color: white;
   border-radius: 10px;
   padding: 11px 15px;
-  font-size: 12px;
+  font-size: var(--text-body);
 }
 .secondary-button {
   border: 1px solid #dde3d4;
@@ -1159,14 +1168,14 @@ button:active:not(:disabled) {
   justify-content: center;
   gap: 8px;
   padding: 11px 17px;
-  font-size: 12px;
+  font-size: var(--text-body);
   font-weight: 500;
 }
 .secondary-button:hover:not(:disabled) {
   background: #f0f4e9;
 }
 .install-copy {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.9;
   color: #77846d;
 }
@@ -1204,7 +1213,7 @@ button:active:not(:disabled) {
   border: 0;
   outline: none;
   background: transparent;
-  font-size: 12px;
+  font-size: var(--text-body);
   padding: 10px 0;
   color: #485842;
 }
@@ -1226,7 +1235,7 @@ button:active:not(:disabled) {
   background: #fffefa;
   border-radius: 11px;
   padding: 10px 16px;
-  font-size: 12px;
+  font-size: var(--text-body);
   color: #839071;
 }
 .filter-button.selected {
@@ -1235,7 +1244,7 @@ button:active:not(:disabled) {
   color: #b27460;
 }
 .filter-button span {
-  font-size: 10px;
+  font-size: var(--text-caption);
   background: #edf0e6;
   border-radius: 5px;
   padding: 2px 6px;
@@ -1250,7 +1259,7 @@ button:active:not(:disabled) {
   border: 1px solid #e4e7dc;
   border-radius: 20px;
   padding: 9px 15px;
-  font-size: 11px;
+  font-size: var(--text-body);
   color: #859079;
   background: #fcfcf7;
   min-height: 38px;
@@ -1265,7 +1274,7 @@ button:active:not(:disabled) {
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  font-size: 11px;
+  font-size: var(--text-body);
   color: #88917f;
   margin: 21px 0 14px;
 }
@@ -1287,13 +1296,13 @@ button:active:not(:disabled) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1.2px;
   color: #9ca78d;
 }
 .library-card > p {
   font-family: var(--heading);
-  font-size: 22px;
+  font-size: var(--text-section);
   line-height: 1.55;
   color: #475840;
   padding: 15px 2px;
@@ -1308,7 +1317,7 @@ button:active:not(:disabled) {
   padding-top: 6px;
 }
 .library-card-actions .text-button {
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .muted {
   color: #969f8c;
@@ -1332,10 +1341,10 @@ button:active:not(:disabled) {
   margin-bottom: 20px;
 }
 .empty-state h2 {
-  font-size: 23px;
+  font-size: var(--text-section);
 }
 .empty-state p {
-  font-size: 13px;
+  font-size: var(--text-body);
   margin: 12px 0 22px;
   line-height: 1.8;
 }
@@ -1364,11 +1373,11 @@ button:active:not(:disabled) {
 }
 .progress-stats strong {
   font-family: var(--heading);
-  font-size: 34px;
+  font-size: var(--text-display);
   color: #4e6344;
 }
 .progress-stats p {
-  font-size: 11px;
+  font-size: var(--text-body);
   color: #8b957e;
   margin-top: 5px;
   display: flex;
@@ -1392,7 +1401,7 @@ button:active:not(:disabled) {
 .week-activity > div {
   text-align: center;
   color: #5d6854;
-  font-size: 11px;
+  font-size: var(--text-body);
 }
 .day-circle {
   border: 1px dashed #dce2d1;
@@ -1402,7 +1411,7 @@ button:active:not(:disabled) {
   display: grid;
   place-items: center;
   margin: 12px auto 9px;
-  font-size: 14px;
+  font-size: var(--text-emphasis);
   color: #929d85;
 }
 .today > span {
@@ -1418,7 +1427,7 @@ button:active:not(:disabled) {
   border: 1px solid #d2e4bd;
 }
 .week-activity small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: #a0a895;
 }
 .badges-heading {
@@ -1457,11 +1466,11 @@ button:active:not(:disabled) {
   color: var(--accent);
 }
 .badge-card h3 {
-  font-size: 17px;
+  font-size: var(--text-card-title);
   color: #76836a;
 }
 .badge-card p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.8;
   color: #9aa18f;
   min-height: 36px;
@@ -1470,7 +1479,7 @@ button:active:not(:disabled) {
 .badge-card > span {
   display: block;
   margin-top: 10px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: #a2a992;
 }
 .unlocked > span {
@@ -1491,10 +1500,10 @@ button:active:not(:disabled) {
   height: 83px;
 }
 .progress-cta h2 {
-  font-size: 21px;
+  font-size: var(--text-section);
 }
 .progress-cta p {
-  font-size: 11px;
+  font-size: var(--text-body);
   color: #8a967a;
   margin-top: 6px;
 }
@@ -1512,7 +1521,7 @@ button:active:not(:disabled) {
   z-index: 200;
   background: #3d5946;
   color: white;
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.6;
   padding: 14px 22px;
   border-radius: 12px;
@@ -1529,7 +1538,7 @@ button:active:not(:disabled) {
   background: #fff0d7;
   border: 1px solid #d6b575;
   padding: 12px 18px;
-  font-size: 12px;
+  font-size: var(--text-body);
   z-index: 210;
   border-radius: 10px;
 }
@@ -1560,14 +1569,14 @@ button:active:not(:disabled) {
   flex: 1;
 }
 .session-header h2 {
-  font-size: 21px;
+  font-size: var(--text-section);
   margin-top: 4px;
 }
 .session-header .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .session-count {
-  font-size: 12px;
+  font-size: var(--text-body);
   color: #909b84;
   background: #eef2e5;
   border-radius: 20px;
@@ -1594,7 +1603,7 @@ button:active:not(:disabled) {
 .reading-instruction {
   text-align: center;
   color: #919c85;
-  font-size: 13px;
+  font-size: var(--text-body);
   margin: 35px 0 22px;
 }
 .reading-card {
@@ -1616,7 +1625,7 @@ button:active:not(:disabled) {
 .reading-text {
   font-family: var(--heading);
   font-weight: 800;
-  font-size: clamp(45px, 7vw, 76px);
+  font-size: clamp(3.25rem, 8vw, 5.25rem);
   letter-spacing: -1.5px;
   color: #344f3b;
   text-align: center;
@@ -1625,20 +1634,20 @@ button:active:not(:disabled) {
   margin: auto 0;
 }
 .reading-text.medium {
-  font-size: clamp(34px, 5vw, 54px);
+  font-size: clamp(2.5rem, 6vw, 3.875rem);
 }
 .reading-text.long {
-  font-size: clamp(27px, 3.7vw, 40px);
+  font-size: clamp(2rem, 4.2vw, 3rem);
   letter-spacing: -0.5px;
 }
 .large-type .reading-text {
-  font-size: clamp(55px, 8vw, 92px);
+  font-size: clamp(4rem, 9vw, 6.25rem);
 }
 .large-type .reading-text.medium {
-  font-size: clamp(40px, 6vw, 65px);
+  font-size: clamp(3rem, 7vw, 4.5rem);
 }
 .large-type .reading-text.long {
-  font-size: clamp(32px, 4.5vw, 50px);
+  font-size: clamp(2.5rem, 5vw, 3.625rem);
 }
 .favorite-button {
   position: absolute;
@@ -1656,7 +1665,7 @@ button:active:not(:disabled) {
   padding: 11px 18px;
   border-radius: 25px;
   min-height: 44px;
-  font-size: 12px;
+  font-size: var(--text-body);
   margin-top: 30px;
 }
 .listen-button:hover {
@@ -1676,10 +1685,10 @@ button:active:not(:disabled) {
   text-align: center;
 }
 .hint-revealed > span {
-  font-size: 38px;
+  font-size: var(--text-large);
 }
 .hint-revealed p {
-  font-size: 14px;
+  font-size: var(--text-emphasis);
   color: #7a896d;
   line-height: 1.7;
 }
@@ -1712,7 +1721,7 @@ button:active:not(:disabled) {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #a0aa91;
   margin-top: 32px;
 }
@@ -1727,16 +1736,16 @@ button:active:not(:disabled) {
   gap: 7px;
   background: var(--card-bg);
   color: var(--accent);
-  font-size: 11px;
+  font-size: var(--text-body);
   padding: 9px 13px;
   border-radius: 20px;
 }
 .exercise-content h1 {
   margin-top: 23px;
-  font-size: 35px;
+  font-size: var(--text-display);
 }
 .exercise-content > p {
-  font-size: 14px;
+  font-size: var(--text-emphasis);
   color: #8b977e;
   line-height: 1.8;
   margin-top: 13px;
@@ -1750,13 +1759,13 @@ button:active:not(:disabled) {
 }
 .memory-card > p {
   font-family: var(--heading);
-  font-size: 38px;
+  font-size: var(--text-large);
   line-height: 1.6;
   font-weight: 800;
   overflow-wrap: anywhere;
 }
 .memory-card.large-type > p {
-  font-size: 46px;
+  font-size: 3.375rem;
 }
 .memory-card .listen-button {
   margin: 23px auto 0;
@@ -1769,7 +1778,7 @@ button:active:not(:disabled) {
 .answer-options > button {
   font-family: var(--heading);
   font-weight: 700;
-  font-size: 24px;
+  font-size: var(--text-section);
   line-height: 1.5;
   text-align: center;
   background: #fffefa;
@@ -1780,7 +1789,7 @@ button:active:not(:disabled) {
   overflow-wrap: anywhere;
 }
 .answer-options.large-type > button {
-  font-size: 30px;
+  font-size: var(--text-heading);
 }
 .answer-options > button:hover {
   border-color: #a4b78e;
@@ -1792,7 +1801,7 @@ button:active:not(:disabled) {
 }
 .answer-feedback {
   min-height: 30px;
-  font-size: 12px !important;
+  font-size: var(--text-body) !important;
 }
 .memory-reminder {
   background: #edf1e4;
@@ -1827,14 +1836,14 @@ button:active:not(:disabled) {
 }
 .completion .eyebrow {
   justify-content: center;
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .completion h1 {
-  font-size: 42px;
+  font-size: var(--text-large);
   margin: 13px 0;
 }
 .completion > p {
-  font-size: 14px;
+  font-size: var(--text-emphasis);
   color: #8a957d;
   line-height: 1.85;
 }
@@ -1850,7 +1859,7 @@ button:active:not(:disabled) {
   padding: 13px 18px;
   width: fit-content;
   margin: 25px auto;
-  font-size: 12px;
+  font-size: var(--text-body);
 }
 .completion .primary-button {
   margin: 0 auto;
@@ -1860,7 +1869,7 @@ button:active:not(:disabled) {
   padding: 32px;
 }
 .exit-dialog p {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.8;
   color: #8b967e;
   margin: 15px 0 25px;
@@ -1869,7 +1878,7 @@ button:active:not(:disabled) {
   margin: 5px;
 }
 .exit-dialog h2 {
-  font-size: 27px;
+  font-size: var(--text-heading);
 }
 @keyframes fade-in {
   from {
@@ -1900,13 +1909,13 @@ button:active:not(:disabled) {
     padding: 43px;
   }
   .hero h2 {
-    font-size: 53px;
+    font-size: 3.8125rem;
   }
   .hero-copy > p {
-    font-size: 14px;
+    font-size: var(--text-emphasis);
   }
   .hero .eyebrow {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .hero-art {
     right: 4%;
@@ -1919,13 +1928,13 @@ button:active:not(:disabled) {
     padding: 23px 25px 20px;
   }
   .level-card h3 {
-    font-size: 22px;
+    font-size: var(--text-section);
   }
   .level-card > p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .level-card-bottom {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .topbar {
     padding: 0 60px;
@@ -1940,11 +1949,11 @@ button:active:not(:disabled) {
     margin-left: 211px;
   }
   .brand {
-    font-size: 30px;
+    font-size: var(--text-heading);
     padding: 0 9px;
   }
   .sidebar-label {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .topbar {
     padding: 0 30px;
@@ -1960,11 +1969,11 @@ button:active:not(:disabled) {
     padding: 30px 0 25px 26px;
   }
   .hero h2 {
-    font-size: 35px;
+    font-size: var(--text-display);
     letter-spacing: -1.5px;
   }
   .hero .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
     letter-spacing: 1.2px;
   }
   .hero-art {
@@ -1973,10 +1982,10 @@ button:active:not(:disabled) {
     bottom: 20px;
   }
   .hero-copy > p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .leo-caption {
-    font-size: 10px;
+    font-size: var(--text-caption);
     left: 27%;
     bottom: 14px;
   }
@@ -1992,16 +2001,16 @@ button:active:not(:disabled) {
     gap: 8px;
   }
   .level-card h3 {
-    font-size: 17px;
+    font-size: var(--text-card-title);
   }
   .level-card > p {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .level-number {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .level-card-bottom {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .level-segments i {
     width: 9px;
@@ -2014,36 +2023,36 @@ button:active:not(:disabled) {
     gap: 11px;
   }
   .daily-illustration {
-    font-size: 43px;
+    font-size: 3.1875rem;
   }
   .daily-card h3 {
-    font-size: 15px;
+    font-size: var(--text-emphasis);
   }
   .daily-card p {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .daily-card .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .parent-tip {
     padding: 17px;
     gap: 12px;
   }
   .parent-tip h3 {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .parent-tip p {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .tip-icon {
     width: 38px;
     height: 38px;
   }
   .parent-tip .text-button {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .progress-cta h2 {
-    font-size: 18px;
+    font-size: var(--text-card-title);
   }
   .progress-cta {
     gap: 13px;
@@ -2054,14 +2063,14 @@ button:active:not(:disabled) {
     height: 65px;
   }
   .progress-cta .primary-button {
-    font-size: 11px;
+    font-size: var(--text-body);
     gap: 10px;
   }
   .detailed h3 {
-    font-size: 20px;
+    font-size: var(--text-card-title);
   }
   .detailed > p {
-    font-size: 11px;
+    font-size: var(--text-body);
     min-height: 84px;
   }
   .level-card.detailed {
@@ -2077,7 +2086,7 @@ button:active:not(:disabled) {
     margin-left: 185px;
   }
   .brand {
-    font-size: 27px;
+    font-size: var(--text-heading);
     gap: 6px;
     padding: 0 6px;
   }
@@ -2085,12 +2094,12 @@ button:active:not(:disabled) {
     width: 32px;
   }
   .sidebar-label {
-    font-size: 6px;
+    font-size: var(--text-caption);
     letter-spacing: 1.1px;
     margin-top: 8px;
   }
   .nav-item {
-    font-size: 11px;
+    font-size: var(--text-body);
     padding: 0 11px;
     gap: 10px;
     min-height: 46px;
@@ -2102,22 +2111,22 @@ button:active:not(:disabled) {
     padding: 13px 11px;
   }
   .goal-heading strong {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .daily-goal p {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .goal-caption {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .goal-caption strong {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .sidebar-footer {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .parent-nav {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .main-content {
     padding: 24px 25px 0;
@@ -2127,7 +2136,7 @@ button:active:not(:disabled) {
     height: 74px;
   }
   .breadcrumb {
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 8px;
   }
   .topbar-actions {
@@ -2140,10 +2149,10 @@ button:active:not(:disabled) {
     display: none;
   }
   .greeting h1 {
-    font-size: 25px;
+    font-size: var(--text-heading);
   }
   .greeting p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .hero {
     min-height: 310px;
@@ -2153,7 +2162,7 @@ button:active:not(:disabled) {
     width: 65%;
   }
   .hero h2 {
-    font-size: 32px;
+    font-size: var(--text-display);
   }
   .hero-art {
     width: 47%;
@@ -2162,29 +2171,29 @@ button:active:not(:disabled) {
     bottom: 14px;
   }
   .hero-footnote {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .leo-caption {
-    font-size: 8px;
+    font-size: var(--text-caption);
     left: 18%;
     bottom: 27px;
   }
   .hero .primary-button {
-    font-size: 11px;
+    font-size: var(--text-body);
     padding: 11px 15px;
     gap: 12px;
   }
   .section-heading h2 {
-    font-size: 18px;
+    font-size: var(--text-card-title);
   }
   .section-heading .text-button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .subtle-count {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .section-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .level-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2194,16 +2203,16 @@ button:active:not(:disabled) {
     padding: 18px;
   }
   .level-card h3 {
-    font-size: 20px;
+    font-size: var(--text-card-title);
   }
   .level-card > p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .level-number {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .level-card-bottom {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .level-card-top {
     gap: 12px;
@@ -2215,34 +2224,34 @@ button:active:not(:disabled) {
     padding: 20px 23px;
   }
   .daily-card h3 {
-    font-size: 19px;
+    font-size: var(--text-card-title);
   }
   .daily-card p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .daily-card .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .parent-tip {
     padding: 20px 23px;
   }
   .parent-tip h3 {
-    font-size: 16px;
+    font-size: var(--text-emphasis);
   }
   .parent-tip p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .parent-tip .text-button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .library-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .page-intro h1 {
-    font-size: 30px;
+    font-size: var(--text-heading);
   }
   .page-intro > p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .progress-stats {
     gap: 10px;
@@ -2252,7 +2261,7 @@ button:active:not(:disabled) {
     padding: 17px 7px;
   }
   .progress-stats p {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .badge-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2267,10 +2276,10 @@ button:active:not(:disabled) {
     margin-left: 78px;
   }
   .page-footer {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .page-footer > button {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .detailed > p {
     min-height: 60px;
@@ -2280,7 +2289,7 @@ button:active:not(:disabled) {
     gap: 12px;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .sidebar {
     display: none;
   }
@@ -2300,7 +2309,7 @@ button:active:not(:disabled) {
     align-items: center;
     gap: 8px;
     font-family: var(--heading);
-    font-size: 27px;
+    font-size: var(--text-heading);
     font-weight: 900;
     color: #436748;
     letter-spacing: -1px;
@@ -2324,10 +2333,10 @@ button:active:not(:disabled) {
   }
   .stat-chip {
     padding: 6px 8px;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .stat-chip strong {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .stat-chip svg {
     height: 16px;
@@ -2340,20 +2349,19 @@ button:active:not(:disabled) {
     margin-bottom: 21px;
   }
   .greeting h1 {
-    font-size: 25px;
+    font-size: var(--text-heading);
   }
   .greeting-sun {
-    font-size: 30px;
+    font-size: var(--text-heading);
   }
   .greeting p {
-    font-size: 11px;
+    font-size: var(--text-body);
     margin-top: 5px;
   }
-  .greeting .gentle-pill {
-    font-size: 8px;
-    padding: 7px 9px;
+  .greeting .context-note {
+    font-size: var(--text-small);
   }
-  .greeting .gentle-pill svg {
+  .greeting .context-note svg {
     width: 12px;
   }
   .hero {
@@ -2365,7 +2373,7 @@ button:active:not(:disabled) {
     width: 60%;
   }
   .hero h2 {
-    font-size: 35px;
+    font-size: var(--text-display);
   }
   .hero-art {
     width: 49%;
@@ -2374,23 +2382,23 @@ button:active:not(:disabled) {
     bottom: 25px;
   }
   .hero-copy > p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .hero .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .hero .primary-button {
-    font-size: 12px;
+    font-size: var(--text-body);
     margin-top: 0;
     padding: 12px 17px;
   }
   .hero-footnote {
     margin-top: 20px;
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .leo-caption {
     bottom: 24px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     left: 20%;
   }
   .bottom-nav {
@@ -2400,7 +2408,7 @@ button:active:not(:disabled) {
     bottom: 0;
     left: 0;
     right: 0;
-    height: calc(69px + env(safe-area-inset-bottom));
+    height: calc(84px + env(safe-area-inset-bottom));
     padding: 7px 13px calc(7px + env(safe-area-inset-bottom));
     border-top: 1px solid #e4e7dc;
     background: #fffefbf5;
@@ -2415,7 +2423,7 @@ button:active:not(:disabled) {
     gap: 5px;
     color: #a0a793;
     border-radius: 10px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     font-weight: 500;
   }
   .bottom-nav button.active {
@@ -2429,17 +2437,17 @@ button:active:not(:disabled) {
     margin-top: 27px;
   }
   .section-heading h2 {
-    font-size: 21px;
+    font-size: var(--text-section);
     gap: 7px;
   }
   .section-heading {
     gap: 10px;
   }
   .section-heading .text-button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .section-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .level-card {
     padding: 20px;
@@ -2452,20 +2460,20 @@ button:active:not(:disabled) {
     margin-bottom: 16px;
   }
   .level-card h3 {
-    font-size: 21px;
+    font-size: var(--text-section);
   }
   .level-card > p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .level-card-bottom {
     margin-top: 19px;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .level-card-top {
     gap: 10px;
   }
   .level-number {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .level-segments i {
     width: 11px;
@@ -2478,17 +2486,17 @@ button:active:not(:disabled) {
     margin-top: 24px;
     padding: 19px 0 15px;
     gap: 10px;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .page-footer > button {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .skip-link {
     left: 15px;
   }
   .toast {
     bottom: 88px;
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .session-page .toast {
     bottom: 20px;
@@ -2500,7 +2508,7 @@ button:active:not(:disabled) {
     padding-top: 10px;
   }
   .library-card > p {
-    font-size: 21px;
+    font-size: var(--text-section);
   }
   .dialog {
     padding: 22px;
@@ -2511,7 +2519,7 @@ button:active:not(:disabled) {
     padding: 16px;
   }
   .dialog-header h2 {
-    font-size: 25px;
+    font-size: var(--text-heading);
   }
   .session-page {
     padding: 19px 23px 25px;
@@ -2520,13 +2528,13 @@ button:active:not(:disabled) {
     gap: 13px;
   }
   .session-header h2 {
-    font-size: 18px;
+    font-size: var(--text-card-title);
   }
   .session-header .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .session-count {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 7px 10px;
   }
   .reading-card {
@@ -2534,48 +2542,48 @@ button:active:not(:disabled) {
     padding: 65px 26px 25px;
   }
   .reading-instruction {
-    font-size: 12px;
+    font-size: var(--text-body);
     margin: 30px 0 23px;
   }
   .reading-controls .primary-button {
-    font-size: 12px;
+    font-size: var(--text-body);
     gap: 9px;
     padding: 12px 17px;
   }
   .reading-controls .secondary-button {
-    font-size: 12px;
+    font-size: var(--text-body);
     padding: 12px;
   }
   .exercise-content {
     margin-top: 34px;
   }
   .exercise-content h1 {
-    font-size: 30px;
+    font-size: var(--text-heading);
   }
   .exercise-content > p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .memory-card {
     padding: 30px 22px;
   }
   .memory-card > p {
-    font-size: 32px;
+    font-size: var(--text-display);
   }
   .memory-card.large-type > p {
-    font-size: 40px;
+    font-size: var(--text-large);
   }
   .answer-options > button {
-    font-size: 22px;
+    font-size: var(--text-section);
     padding: 18px;
   }
   .answer-options.large-type > button {
-    font-size: 28px;
+    font-size: var(--text-heading);
   }
   .completion {
     padding-top: 37px;
   }
   .completion h1 {
-    font-size: 36px;
+    font-size: var(--text-large);
   }
   .completion-fox {
     width: 160px;
@@ -2591,10 +2599,10 @@ button:active:not(:disabled) {
     width: 42px;
   }
   .badge-card h3 {
-    font-size: 19px;
+    font-size: var(--text-card-title);
   }
   .progress-cta h2 {
-    font-size: 21px;
+    font-size: var(--text-section);
   }
   .progress-cta > button {
     margin-left: auto;
@@ -2610,7 +2618,7 @@ button:active:not(:disabled) {
     height: 68px;
   }
   .mobile-brand {
-    font-size: 25px;
+    font-size: var(--text-heading);
   }
   .topbar-actions {
     gap: 5px;
@@ -2623,13 +2631,13 @@ button:active:not(:disabled) {
     padding: 22px 18px 79px;
   }
   .greeting h1 {
-    font-size: 25px;
+    font-size: var(--text-heading);
   }
   .greeting p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
-  .greeting .gentle-pill {
-    display: none;
+  .greeting .context-note {
+    display: flex;
   }
   .hero {
     min-height: 480px;
@@ -2646,17 +2654,17 @@ button:active:not(:disabled) {
     z-index: 4;
   }
   .hero .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
     letter-spacing: 1.25px;
   }
   .hero h2 {
-    font-size: 35px;
+    font-size: var(--text-display);
     line-height: 1.19;
     letter-spacing: -1.4px;
     margin: 13px 0 11px;
   }
   .hero-copy > p {
-    font-size: 11px;
+    font-size: var(--text-body);
     line-height: 1.8;
     margin-bottom: 18px;
   }
@@ -2679,12 +2687,12 @@ button:active:not(:disabled) {
   .leo-caption {
     bottom: 14px;
     left: 17%;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .hero .primary-button {
     min-height: 43px;
     padding: 11px 15px;
-    font-size: 11px;
+    font-size: var(--text-body);
     gap: 16px;
   }
   .level-grid {
@@ -2708,24 +2716,24 @@ button:active:not(:disabled) {
     margin-bottom: 13px;
   }
   .level-number {
-    font-size: 6px;
+    font-size: var(--text-caption);
     letter-spacing: 0.7px;
   }
   .level-card-arrow {
     display: none;
   }
   .level-card h3 {
-    font-size: 17px;
+    font-size: var(--text-card-title);
     letter-spacing: -0.5px;
   }
   .level-card > p {
-    font-size: 9px;
+    font-size: var(--text-caption);
     line-height: 1.65;
     margin-top: 5px;
     min-height: 30px;
   }
   .level-card-bottom {
-    font-size: 8px;
+    font-size: var(--text-caption);
     gap: 4px;
     margin-top: 11px;
   }
@@ -2740,18 +2748,18 @@ button:active:not(:disabled) {
     align-items: flex-start;
   }
   .section-heading h2 {
-    font-size: 20px;
+    font-size: var(--text-card-title);
     display: block;
   }
   .subtle-count {
     display: none;
   }
   .section-heading p {
-    font-size: 9px;
+    font-size: var(--text-caption);
     max-width: 215px;
   }
   .section-heading .text-button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 4px;
     padding-top: 6px;
   }
@@ -2763,16 +2771,16 @@ button:active:not(:disabled) {
     gap: 12px;
   }
   .daily-illustration {
-    font-size: 41px;
+    font-size: var(--text-large);
   }
   .daily-card h3 {
-    font-size: 17px;
+    font-size: var(--text-card-title);
   }
   .daily-card p {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .daily-card .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .round-button {
     width: 30px;
@@ -2786,13 +2794,13 @@ button:active:not(:disabled) {
     padding: 18px 17px;
   }
   .parent-tip h3 {
-    font-size: 16px;
+    font-size: var(--text-emphasis);
   }
   .parent-tip p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .page-footer {
-    font-size: 8px;
+    font-size: var(--text-caption);
     gap: 7px;
     align-items: flex-start;
   }
@@ -2801,7 +2809,7 @@ button:active:not(:disabled) {
     line-height: 1.7;
   }
   .page-footer > button {
-    font-size: 8px;
+    font-size: var(--text-caption);
     white-space: nowrap;
     padding: 0;
   }
@@ -2809,20 +2817,20 @@ button:active:not(:disabled) {
     width: 13px;
   }
   .page-intro h1 {
-    font-size: 29px;
+    font-size: var(--text-heading);
   }
   .page-intro > .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
     letter-spacing: 1.3px;
   }
   .page-intro > p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .level-card.detailed {
     padding: 18px 14px;
   }
   .detailed h3 {
-    font-size: 20px;
+    font-size: var(--text-card-title);
     line-height: 1.3;
   }
   .detailed .level-icon {
@@ -2834,11 +2842,11 @@ button:active:not(:disabled) {
     gap: 7px;
   }
   .detailed > p {
-    font-size: 10px;
+    font-size: var(--text-caption);
     min-height: 90px;
   }
   .detailed .level-card-bottom {
-    font-size: 8px;
+    font-size: var(--text-caption);
     margin-top: 20px;
   }
   .info-note {
@@ -2846,7 +2854,7 @@ button:active:not(:disabled) {
     gap: 9px;
   }
   .info-note p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .library-toolbar {
     gap: 8px;
@@ -2856,10 +2864,10 @@ button:active:not(:disabled) {
     gap: 7px;
   }
   .search-field input {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .filter-button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 9px 10px;
     gap: 6px;
   }
@@ -2874,14 +2882,14 @@ button:active:not(:disabled) {
   }
   .level-filters button {
     padding: 8px 12px;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .library-summary {
-    font-size: 10px;
+    font-size: var(--text-caption);
     gap: 8px;
   }
   .library-summary .text-button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .library-grid {
     gap: 11px;
@@ -2891,19 +2899,19 @@ button:active:not(:disabled) {
     min-height: 166px;
   }
   .library-card > p {
-    font-size: 19px;
+    font-size: var(--text-card-title);
     line-height: 1.5;
     padding: 13px 0;
   }
   .library-card-actions .text-button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 5px;
   }
   .library-card-actions .icon-button {
     width: 30px;
   }
   .library-card-meta {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .library-card-meta .icon-button {
     width: 32px;
@@ -2917,7 +2925,7 @@ button:active:not(:disabled) {
     padding: 18px;
   }
   .progress-stats p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .activity-panel {
     padding: 18px 13px;
@@ -2926,7 +2934,7 @@ button:active:not(:disabled) {
     padding: 0 5px;
   }
   .activity-panel .section-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
     max-width: none;
   }
   .week-activity {
@@ -2935,13 +2943,13 @@ button:active:not(:disabled) {
   .day-circle {
     height: 36px;
     width: 36px;
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .week-activity > div {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .week-activity small {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .badge-grid {
     gap: 12px;
@@ -2950,10 +2958,10 @@ button:active:not(:disabled) {
     padding: 22px 10px;
   }
   .badge-card h3 {
-    font-size: 17px;
+    font-size: var(--text-card-title);
   }
   .badge-card p {
-    font-size: 9px;
+    font-size: var(--text-caption);
     min-height: 32px;
   }
   .progress-cta {
@@ -2961,10 +2969,10 @@ button:active:not(:disabled) {
     gap: 13px;
   }
   .progress-cta h2 {
-    font-size: 19px;
+    font-size: var(--text-card-title);
   }
   .progress-cta p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .progress-cta > svg {
     height: 63px;
@@ -2986,14 +2994,14 @@ button:active:not(:disabled) {
     margin-bottom: 18px;
   }
   .dialog-header h2 {
-    font-size: 24px;
+    font-size: var(--text-section);
   }
   .level-dialog-intro {
     padding: 16px;
     gap: 12px;
   }
   .level-dialog-intro p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .level-dialog-intro .level-icon {
     min-width: 46px;
@@ -3004,39 +3012,39 @@ button:active:not(:disabled) {
     gap: 11px;
   }
   .lesson-row strong {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .lesson-row small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .lesson-number {
     width: 34px;
     height: 37px;
     min-width: 34px;
-    font-size: 14px;
+    font-size: var(--text-emphasis);
   }
   .settings-content .parent-intro {
     padding: 13px;
     gap: 9px;
   }
   .parent-intro p {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .setting-row strong {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .setting-row small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .setting-row select {
     max-width: 123px;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .setting-label {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .parent-tips {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .session-page {
     padding: 17px 16px 24px;
@@ -3046,14 +3054,14 @@ button:active:not(:disabled) {
     padding-bottom: 18px;
   }
   .session-header h2 {
-    font-size: 16px;
+    font-size: var(--text-emphasis);
   }
   .session-header .eyebrow {
-    font-size: 6px;
+    font-size: var(--text-caption);
     letter-spacing: 1px;
   }
   .session-count {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 7px 9px;
   }
   .session-header > .icon-button {
@@ -3065,35 +3073,35 @@ button:active:not(:disabled) {
     border-radius: 21px;
   }
   .reading-instruction {
-    font-size: 11px;
+    font-size: var(--text-body);
     margin: 26px 0 20px;
   }
   .reading-text {
-    font-size: 52px;
+    font-size: 3.75rem;
   }
   .reading-text.medium {
-    font-size: 37px;
+    font-size: var(--text-large);
   }
   .reading-text.long {
-    font-size: 28px;
+    font-size: var(--text-heading);
     line-height: 1.6;
   }
   .large-type .reading-text {
-    font-size: 62px;
+    font-size: 4.375rem;
   }
   .large-type .reading-text.medium {
-    font-size: 44px;
+    font-size: 3.25rem;
   }
   .large-type .reading-text.long {
-    font-size: 33px;
+    font-size: var(--text-display);
   }
   .reading-controls .primary-button {
-    font-size: 11px;
+    font-size: var(--text-body);
     gap: 8px;
     padding: 11px 13px;
   }
   .reading-controls .secondary-button {
-    font-size: 11px;
+    font-size: var(--text-body);
     padding: 10px;
     gap: 4px;
   }
@@ -3112,47 +3120,47 @@ button:active:not(:disabled) {
     padding: 15px 5px;
   }
   .hint-revealed p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .hint-revealed > span {
-    font-size: 32px;
+    font-size: var(--text-display);
   }
   .session-reassurance {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .exercise-content h1 {
-    font-size: 29px;
+    font-size: var(--text-heading);
   }
   .memory-card {
     padding: 27px 20px;
   }
   .memory-card > p {
-    font-size: 30px;
+    font-size: var(--text-heading);
   }
   .memory-card.large-type > p {
-    font-size: 37px;
+    font-size: var(--text-large);
   }
   .answer-options > button {
-    font-size: 21px;
+    font-size: var(--text-section);
     padding: 18px 15px;
   }
   .answer-options.large-type > button {
-    font-size: 26px;
+    font-size: var(--text-heading);
   }
   .completion h1 {
-    font-size: 34px;
+    font-size: var(--text-display);
   }
   .completion > p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .completion .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .reward-pill {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .completion .primary-button {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
 }
 @media (max-width: 360px) {
@@ -3164,7 +3172,7 @@ button:active:not(:disabled) {
     padding: 0 15px;
   }
   .hero h2 {
-    font-size: 31px;
+    font-size: var(--text-display);
   }
   .hero-copy {
     padding-left: 21px;
@@ -3177,10 +3185,10 @@ button:active:not(:disabled) {
     width: 95%;
   }
   .level-card h3 {
-    font-size: 16px;
+    font-size: var(--text-emphasis);
   }
   .level-number {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .level-card {
     padding: 13px 11px;
@@ -3189,35 +3197,35 @@ button:active:not(:disabled) {
     gap: 6px;
   }
   .level-card-bottom {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .level-segments i {
     width: 6px;
   }
   .section-heading h2 {
-    font-size: 18px;
+    font-size: var(--text-card-title);
   }
   .section-heading .text-button {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .daily-card h3 {
-    font-size: 15px;
+    font-size: var(--text-emphasis);
   }
   .daily-card .eyebrow {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .daily-card p {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .daily-card {
     padding: 16px 12px;
     gap: 9px;
   }
   .daily-illustration {
-    font-size: 36px;
+    font-size: var(--text-large);
   }
   .session-header h2 {
-    font-size: 14px;
+    font-size: var(--text-emphasis);
   }
   .reading-controls {
     flex-wrap: wrap;
@@ -3231,10 +3239,10 @@ button:active:not(:disabled) {
     padding-right: 15px;
   }
   .reading-text.long {
-    font-size: 26px;
+    font-size: var(--text-heading);
   }
   .large-type .reading-text.long {
-    font-size: 31px;
+    font-size: var(--text-display);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3250,20 +3258,20 @@ button:active:not(:disabled) {
 /* Keep the complete headline visible on narrow phones. */
 @media (max-width: 470px) {
   .hero h2 {
-    font-size: clamp(26px, 7.5vw, 32px);
+    font-size: clamp(2rem, 8.2vw, 2.5rem);
     white-space: normal;
   }
   .hero-copy > p {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .hero .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .level-card > p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .level-card-bottom {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .level-card-bottom .level-segments {
     display: none;
@@ -3323,7 +3331,7 @@ button:active:not(:disabled) {
 .reset-link {
   color: #5d6854;
 }
-.gentle-pill,
+.context-note,
 .session-count {
   color: #63734e;
 }
@@ -3468,4 +3476,648 @@ button:active:not(:disabled) {
 }
 .day-circle.completed {
   color: #506b39;
+}
+
+/* Let layouts make room for readable type instead of shrinking labels on phones. */
+.sidebar {
+  width: 276px;
+  padding-inline: 20px;
+  overflow-y: auto;
+}
+.main-shell {
+  margin-left: 276px;
+}
+.sidebar-label {
+  letter-spacing: 0.07em;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.nav-item {
+  min-height: 56px;
+  padding-block: 9px;
+}
+.sidebar-bottom {
+  padding-top: 28px;
+}
+.goal-caption {
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.sidebar-footer {
+  align-items: baseline;
+  text-align: center;
+}
+.brand {
+  font-size: var(--text-display);
+  padding-inline: 3px;
+}
+.breadcrumb {
+  font-size: var(--text-small);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.topbar {
+  gap: 20px;
+}
+.topbar-actions {
+  flex-shrink: 0;
+}
+.stat-chip {
+  line-height: 1.4;
+}
+.greeting {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.greeting > div {
+  min-width: 0;
+}
+.greeting h1 {
+  overflow-wrap: anywhere;
+}
+.context-note {
+  font-size: var(--text-small);
+  gap: 8px;
+  color: #5d6854;
+}
+.context-note svg {
+  width: 18px;
+  height: 18px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  padding: 36px;
+  gap: 16px;
+  min-height: 0;
+}
+.hero-copy {
+  width: auto;
+  padding: 0;
+  min-width: 0;
+  pointer-events: auto;
+}
+.hero h2 {
+  white-space: normal;
+  letter-spacing: -0.035em;
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  margin: 18px 0;
+}
+.hero-copy > p {
+  font-size: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+.hero .eyebrow {
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+}
+.hero-art {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  padding-bottom: 36px;
+  align-self: center;
+}
+.forest-scene {
+  max-height: none;
+}
+.leo-caption {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  white-space: normal;
+  font-size: var(--text-caption);
+  transform: none;
+  line-height: 1.6;
+}
+.leo-caption svg {
+  display: none;
+}
+.hero-footnote {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--text-caption);
+  gap: 10px;
+}
+.eyebrow {
+  letter-spacing: 0.08em;
+}
+.primary-button,
+.hero .primary-button,
+.secondary-button,
+.danger-button,
+.listen-button,
+.reading-controls .primary-button,
+.reading-controls .secondary-button,
+.completion .primary-button,
+.progress-cta .primary-button {
+  font-size: var(--text-body);
+  min-height: 54px;
+  line-height: 1.5;
+  padding: 14px 20px;
+}
+.text-button,
+.parent-tip .text-button,
+.section-heading .text-button,
+.library-summary .text-button,
+.library-card-actions .text-button {
+  font-size: var(--text-small);
+  min-height: 44px;
+  line-height: 1.5;
+  white-space: normal;
+  text-align: left;
+}
+.section-heading {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+.section-heading h2 {
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.section-heading p {
+  font-size: var(--text-small);
+  max-width: none;
+}
+.level-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.level-card,
+.level-card.detailed {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+.level-card-top {
+  width: 100%;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.level-icon {
+  flex-shrink: 0;
+}
+.level-number {
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+}
+.level-card h3,
+.detailed h3 {
+  font-size: var(--text-card-title);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.level-card > p,
+.detailed > p {
+  font-size: var(--text-body);
+  line-height: 1.6;
+  margin-block: 10px 18px;
+  min-height: 0;
+}
+.level-card-bottom,
+.detailed .level-card-bottom {
+  width: 100%;
+  font-size: var(--text-caption);
+  line-height: 1.6;
+  margin-top: auto;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.home-bottom {
+  grid-template-columns: 1fr 1fr;
+}
+.daily-card,
+.parent-tip {
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+}
+.daily-card > div,
+.parent-tip > div {
+  min-width: 0;
+}
+.daily-card h3 {
+  font-size: var(--text-card-title);
+}
+.daily-card p,
+.parent-tip p {
+  font-size: var(--text-small);
+}
+.daily-card .eyebrow {
+  font-size: var(--text-caption);
+}
+.round-button {
+  min-width: 44px;
+  height: 44px;
+}
+.page-footer {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--text-caption);
+}
+.page-footer > span {
+  max-width: none;
+}
+.page-footer > button {
+  font-size: var(--text-caption);
+  min-height: 44px;
+  white-space: normal;
+}
+.dialog {
+  width: 660px;
+}
+.dialog.wide {
+  width: 740px;
+}
+.dialog-header h2 {
+  line-height: 1.3;
+}
+.icon-button {
+  min-width: 44px;
+  min-height: 44px;
+}
+.lesson-row > span:nth-child(2),
+.setting-row > div,
+.setting-row > label {
+  min-width: 0;
+}
+.lesson-row strong {
+  font-size: var(--text-emphasis);
+}
+.lesson-row small {
+  font-size: var(--text-caption);
+  line-height: 1.6;
+}
+.setting-row {
+  gap: 20px;
+  padding-block: 18px;
+}
+.setting-row strong,
+.setting-label,
+.name-input {
+  font-size: var(--text-body);
+}
+.setting-row small {
+  font-size: var(--text-caption);
+  line-height: 1.6;
+}
+.setting-row select {
+  font-size: var(--text-small);
+  min-height: 48px;
+  max-width: 200px;
+}
+.parent-intro p,
+.settings-content .parent-intro p,
+.parent-tips {
+  font-size: var(--text-body);
+  line-height: 1.75;
+}
+.parent-tips {
+  padding-left: 28px;
+}
+.reset-confirm > div {
+  flex-wrap: wrap;
+}
+.library-toolbar,
+.library-summary {
+  flex-wrap: wrap;
+}
+.search-field {
+  flex-basis: 260px;
+  min-height: 54px;
+}
+.search-field input {
+  font-size: var(--text-body);
+}
+.filter-button,
+.level-filters button {
+  font-size: var(--text-small);
+  min-height: 48px;
+}
+.library-card-meta {
+  font-size: var(--text-caption);
+}
+.library-card > p {
+  font-size: var(--text-card-title);
+}
+.library-card-actions {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.library-summary {
+  font-size: var(--text-small);
+}
+.progress-stats p {
+  font-size: var(--text-small);
+}
+.badge-card p {
+  font-size: var(--text-small);
+  min-height: 0;
+}
+.badge-card > span {
+  font-size: var(--text-caption);
+}
+.progress-cta {
+  flex-wrap: wrap;
+}
+.progress-cta .primary-button {
+  white-space: normal;
+  margin-left: auto;
+}
+.progress-cta > div {
+  min-width: 0;
+  flex: 1 1 240px;
+}
+.session-header {
+  flex-wrap: wrap;
+}
+.session-header > div {
+  min-width: 0;
+}
+.session-header h2 {
+  font-size: var(--text-card-title);
+}
+.session-header .eyebrow {
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
+}
+.session-count {
+  font-size: var(--text-small);
+}
+.reading-instruction,
+.hint-revealed p {
+  font-size: var(--text-body);
+}
+.reading-controls {
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.reading-card {
+  padding-inline: 28px;
+}
+.reading-text {
+  letter-spacing: -0.015em;
+}
+.answer-feedback {
+  font-size: var(--text-small) !important;
+}
+.session-reassurance,
+.completion .eyebrow,
+.reward-pill {
+  font-size: var(--text-caption);
+}
+
+@media (max-width: 1280px) {
+  .level-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .home-bottom {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-art {
+    width: min(100%, 460px);
+    justify-self: center;
+  }
+  .hero h2 {
+    max-width: 18ch;
+  }
+  .stat-chip > span {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .main-shell {
+    margin-left: 0;
+  }
+  .main-content {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom));
+  }
+  .hero {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    padding: 30px;
+    gap: 16px;
+  }
+  .hero-art {
+    width: 100%;
+  }
+  .hero h2 {
+    font-size: clamp(2.125rem, 4.5vw, 2.75rem);
+  }
+  .bottom-nav {
+    min-height: calc(84px + env(safe-area-inset-bottom));
+  }
+  .bottom-nav button {
+    min-width: 0;
+    font-size: var(--text-caption);
+    line-height: 1.4;
+    padding-inline: 2px;
+  }
+  .toast {
+    bottom: calc(100px + env(safe-area-inset-bottom));
+  }
+  .topbar {
+    min-height: 84px;
+    height: auto;
+    padding-block: 14px;
+  }
+  .mobile-brand {
+    font-size: 2rem;
+  }
+  .profile-button {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .profile-button svg {
+    width: 44px;
+    height: 44px;
+  }
+  .greeting .context-note {
+    font-size: var(--text-small);
+    padding: 0;
+  }
+  .greeting .context-note svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-art {
+    max-width: 400px;
+  }
+  .hero h2 {
+    font-size: clamp(2.125rem, 6.2vw, 2.75rem);
+    max-width: none;
+  }
+  .hero-copy > p {
+    max-width: 42ch;
+  }
+  .section-heading > .text-button {
+    justify-content: flex-start;
+  }
+  .level-card,
+  .level-card.detailed {
+    padding: 22px;
+  }
+  .progress-stats,
+  .badge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .setting-row:has(select) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .setting-row select {
+    max-width: none;
+    width: 100%;
+  }
+  .activity-panel .context-note {
+    font-size: var(--text-caption);
+  }
+  .card-dots {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .session-header .session-count {
+    margin-left: auto;
+  }
+}
+@media (max-width: 540px) {
+  .level-grid,
+  .library-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding: 25px 22px;
+  }
+  .hero-art {
+    max-width: 340px;
+  }
+  .hero-footnote {
+    display: flex;
+  }
+  .hero h2 {
+    font-size: clamp(2rem, 8.2vw, 2.5rem);
+  }
+  .level-card,
+  .level-card.detailed {
+    padding: 24px;
+  }
+  .level-card-arrow {
+    display: block;
+  }
+  .level-icon {
+    width: 46px;
+    height: 46px;
+  }
+  .level-card > p {
+    margin-bottom: 20px;
+  }
+  .level-card-bottom .level-segments {
+    display: flex;
+  }
+  .daily-card {
+    flex-wrap: wrap;
+  }
+  .daily-card > div {
+    flex: 1 1 180px;
+  }
+  .daily-card .round-button {
+    margin-left: auto;
+  }
+  .parent-tip {
+    gap: 12px;
+    padding: 22px;
+  }
+  .parent-tip .tip-icon {
+    display: none;
+  }
+  .topbar {
+    gap: 10px;
+    padding-inline: 16px;
+  }
+  .mobile-brand {
+    font-size: 1.75rem;
+    gap: 6px;
+  }
+  .topbar-actions {
+    gap: 5px;
+  }
+  .stat-chip {
+    padding: 6px;
+    gap: 4px;
+  }
+  .stat-chip strong {
+    font-size: var(--text-small);
+  }
+  .stat-chip svg {
+    width: 16px;
+  }
+  .bottom-nav {
+    padding-inline: 4px;
+  }
+  .bottom-nav button {
+    letter-spacing: -0.02em;
+  }
+  .parent-intro {
+    align-items: flex-start;
+  }
+  .settings-content .parent-intro .tip-icon {
+    display: none;
+  }
+  .lesson-row {
+    align-items: flex-start;
+  }
+  .reading-controls > .primary-button {
+    flex: 1 1 180px;
+  }
+  .reading-controls > .secondary-button {
+    flex: 1 1 110px;
+  }
+  .reading-controls .card-dots {
+    display: flex;
+  }
+  .session-header .eyebrow {
+    font-size: var(--text-caption);
+  }
+  .reading-text.long {
+    font-size: 2.125rem;
+  }
+  .large-type .reading-text.long {
+    font-size: 2.625rem;
+  }
+  .week-activity {
+    gap: 2px;
+  }
+  .week-activity > div,
+  .week-activity small {
+    font-size: var(--text-caption);
+  }
+}
+
+@media (max-width: 360px) {
+  .topbar {
+    padding-inline: 12px;
+    gap: 6px;
+  }
+  .week-activity {
+    grid-template-columns: repeat(7, minmax(42px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
 }
