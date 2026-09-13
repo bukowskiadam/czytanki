@@ -60,3 +60,11 @@ or synchronization of simultaneous editing in multiple tabs is included.
 - Empty new names are rejected; long names fit phone and tablet layouts.
 - Profile controls pass accessibility checks and the existing reading/offline
   regression suite continues to pass.
+
+## Verification result
+
+The profile branch was combined with typography commit `5c58af0` without conflicts.
+The combined build passed 16 unit tests and 36 browser tests across desktop and
+mobile, including migration failure, data isolation, keyboard focus, accessibility,
+offline reopening and layouts from 320 px. Screenshots at 390 px and 593 px were
+visually checked. The typography task completed before updating the main checkout.
