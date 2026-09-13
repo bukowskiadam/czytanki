@@ -34,3 +34,12 @@ Browser emulation does not replace testing on every physical phone or tablet. Po
 - The complete 28-test browser suite passes with `VITE_BASE_PATH=/czytanki/`, including reopening offline on both desktop and mobile.
 - Unit tests: 10 passed. Formatting check passed.
 - The workflow validates the actual Pages base path before uploading the production artifact.
+
+## Readability update — 2026-09-13
+
+- Introduced a shared rem-based type scale: body copy and primary controls at 18px, secondary controls at 16px, and captions at least 14px with default browser settings.
+- Enlarged typography across navigation, level cards, the library, progress, reading sessions and parent settings.
+- Reflowed the hero illustration and cards to accommodate larger text; narrow phones show one card per row and portrait tablets use bottom navigation.
+- Changed the pace message into plain supporting text without a filled pill.
+- Manually reviewed the dashboard at 390, 593 and 1440px, phone settings and library, and progress at 320px. The narrow weekly chart scrolls within its panel.
+- Production build, formatting and all 28 existing browser tests passed, including responsive layout, accessibility, offline use and reading flows.
