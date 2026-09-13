@@ -56,11 +56,11 @@ Workflow details follow the [GitHub Pages documentation](https://docs.github.com
 - Self-paced six-card sessions with optional hints and Polish speech.
 - A recognition game with friendly retries, optional reminders and three choices.
 - Search that understands Polish diacritics, level filters, favorites and custom practice.
-- Locally saved progress, daily activity, adjustable goals, stars and lasting achievement badges.
-- Parent settings: nickname, large text, uppercase text, voice speed and data reset confirmation.
+- Multiple child profiles with separate locally saved progress, favorites, daily activity, goals, stars and achievement badges.
+- Parent settings: add/switch/rename/delete child profiles, large text, uppercase text, voice speed and per-child progress reset confirmation.
 - Responsive navigation, keyboard focus management, reduced-motion support and installable PWA assets.
 
-There are no accounts, advertisements, analytics or remote data storage. The nickname, settings and progress stay in local browser storage under `czytanki-progress-v1`. Clearing browser data removes them. Private browsing or a full storage quota can prevent persistence; the app shows a notice and remains usable. Different browsers and devices keep separate progress.
+There are no accounts, advertisements, analytics or remote data storage. Profiles, nicknames, settings and progress stay in local browser storage under `czytanki-profiles-v1`. Existing single-child progress is migrated automatically. Clearing browser data removes them. Private browsing or a full storage quota can prevent persistence; the app shows a notice and remains usable. Different browsers and devices keep separate progress.
 
 ## Checks
 
@@ -85,7 +85,10 @@ npm run icons   # Regenerate PNG app icons from the original SVG
 - `src/components/Dialog.tsx`: accessible modal focus management.
 - `src/components/Illustrations.tsx`: original vector illustrations and Leo the fox.
 - `src/data.ts`: the Polish curriculum; add cards and lessons here.
-- `src/storage.ts`: validated local storage and progress calculations.
+- `src/storage.ts`: validated progress and progress calculations.
+- `src/profiles.ts`, `src/useProfiles.ts`: child profiles, migration and persistence.
+- `src/components/ProfileManager.tsx`: profile selection and management.
+- `docs/PROFILES.md`: profile behavior, acceptance checks and integration plan.
 - `src/styles.css`: responsive design and reading typography.
 - `scripts/build-sw.mjs`: deterministic offline cache generation.
 - `docs/PLAN.md`: product decisions and research sources.

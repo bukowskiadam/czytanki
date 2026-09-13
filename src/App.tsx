@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
+import { useProfiles } from './useProfiles';
+import { profileName } from './profiles';
+import { ProfileManager } from './components/ProfileManager';
 import { polishPlural, cardCount } from './format';
 import { allCards, allLessons, levels, type Level, type ReadingCard } from './data';
 import {
   completeLesson,
   dateKey,
-  defaultProgress,
   getStreak,
   getLongestStreak,
-  parseProgress,
-  STORAGE_KEY,
   type Progress,
   type Settings,
 } from './storage';
@@ -33,32 +33,26 @@ const pageTitles = {
   library: 'Biblioteczka',
   progress: 'Moje sukcesy',
 };
-function loadProgress() {
-  try {
-    return parseProgress(localStorage.getItem(STORAGE_KEY));
-  } catch {
-    return structuredClone(defaultProgress);
-  }
-}
 export default function App() {
   const [page, setPage] = useState<Page>('home');
-  const [progress, setProgress] = useState<Progress>(loadProgress);
+  const {
+    profiles,
+    activeProfile,
+    progress,
+    storageError,
+    setProgress,
+    selectProfile,
+    addProfile,
+    deleteProfile,
+    resetProgress,
+  } = useProfiles();
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
   const [toast, setToast] = useState('');
-  const [storageError, setStorageError] = useState(false);
   const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
   const [installHelp, setInstallHelp] = useState(false);
   const [libraryFavorites, setLibraryFavorites] = useState(false);
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-      setStorageError(false);
-    } catch {
-      setStorageError(true);
-    }
-  }, [progress]);
   useEffect(() => {
     if (!toast) return;
     const timer = setTimeout(() => setToast(''), 4500);
@@ -142,7 +136,7 @@ export default function App() {
     return (
       <>
         <ReadingSession
-          key={session.id}
+          key={`${activeProfile.id}:${session.id}`}
           session={session}
           settings={progress.settings}
           favorites={progress.favorites}
@@ -159,7 +153,7 @@ export default function App() {
             {toast}
           </div>
         )}
-        {storageError && (
+        {storageError && !settingsOpen && (
           <div className="storage-warning" role="status">
             Postęp nie może zostać zapisany. Sprawdź miejsce i ustawienia pamięci przeglądarki.
           </div>
@@ -264,6 +258,12 @@ export default function App() {
           </div>
         </header>
         <main id="main" className="main-content">
+          <div className="current-reader">
+            <span>
+              Czyta: <strong>{profileName(activeProfile)}</strong>
+            </span>
+            <button onClick={() => setSettingsOpen(true)}>Zmień profil</button>
+          </div>
           {page === 'home' && (
             <>
               <div className="greeting">
@@ -508,12 +508,38 @@ export default function App() {
       )}
       {settingsOpen && (
         <SettingsDialog
+          activeProfileId={activeProfile.id}
+          storageError={storageError}
+          profiles={
+            <ProfileManager
+              profiles={profiles}
+              activeProfileId={activeProfile.id}
+              onSelect={(id) => {
+                selectProfile(id);
+                setSelectedLevel(null);
+                setLibraryFavorites(false);
+                navigate('home');
+              }}
+              onAdd={(name) => {
+                addProfile(name);
+                setSelectedLevel(null);
+                setLibraryFavorites(false);
+                navigate('home');
+              }}
+              onDelete={(id) => {
+                deleteProfile(id);
+                setSelectedLevel(null);
+                setLibraryFavorites(false);
+                navigate('home');
+              }}
+            />
+          }
           settings={progress.settings}
           onChange={(settings) => setProgress((current) => ({ ...current, settings }))}
           onClose={() => setSettingsOpen(false)}
           onReset={() => {
-            setProgress(structuredClone(defaultProgress));
-            setToast('Postępy i ustawienia zostały wyzerowane. Nowa przygoda czeka!');
+            resetProgress();
+            setToast(`Postępy profilu ${profileName(activeProfile)} zostały wyzerowane.`);
             setSettingsOpen(false);
           }}
         />
@@ -549,7 +575,7 @@ export default function App() {
           {toast}
         </div>
       )}
-      {storageError && (
+      {storageError && !settingsOpen && (
         <div className="storage-warning" role="status">
           Postęp nie może zostać zapisany. Sprawdź miejsce i ustawienia pamięci przeglądarki.
         </div>
@@ -910,21 +936,33 @@ function ProgressPage({
   );
 }
 function SettingsDialog({
+  activeProfileId,
+  storageError,
+  profiles,
   settings,
   onChange,
   onClose,
   onReset,
 }: {
+  activeProfileId: string;
+  storageError: boolean;
+  profiles: ReactNode;
   settings: Settings;
   onChange: (settings: Settings) => void;
   onClose: () => void;
   onReset: () => void;
 }) {
   const [resetConfirm, setResetConfirm] = useState(false);
+  useEffect(() => setResetConfirm(false), [activeProfileId]);
   const update = (patch: Partial<Settings>) => onChange({ ...settings, ...patch });
   return (
     <Dialog title="Strefa rodzica" onClose={onClose}>
       <div className="settings-content">
+        {storageError && (
+          <p className="profile-save-warning" role="status">
+            Postęp nie może zostać zapisany. Sprawdź miejsce i ustawienia pamięci przeglądarki.
+          </p>
+        )}
         <div className="parent-intro">
           <span className="tip-icon">
             <Icon name="heart" />
@@ -935,7 +973,8 @@ function SettingsDialog({
             <strong>Podążaj za tempem swojego dziecka.</strong>
           </p>
         </div>
-        <h3>Po swojemu</h3>
+        {profiles}
+        <h3>Ustawienia wybranego dziecka</h3>
         <label className="setting-label" htmlFor="child-name">
           Imię lub pseudonim odkrywcy <span>(opcjonalnie)</span>
         </label>
@@ -1044,7 +1083,10 @@ function SettingsDialog({
         {resetConfirm ? (
           <div className="reset-confirm" role="alert">
             <strong>Usunąć wszystkie postępy i ulubione?</strong>
-            <p>Tej zmiany nie można cofnąć.</p>
+            <p>
+              Dotyczy tylko profilu „{settings.name.trim() || 'Odkrywca'}”. Imię i ustawienia oraz
+              pozostałe profile zostaną zachowane. Tej zmiany nie można cofnąć.
+            </p>
             <div>
               <button className="secondary-button" onClick={() => setResetConfirm(false)}>
                 Zachowaj dane

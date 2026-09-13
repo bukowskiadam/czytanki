@@ -242,7 +242,7 @@ test('reset requires an explicit choice and then clears only the app data', asyn
   await page.getByRole('button', { name: 'Zacznij od nowa — wyzeruj dane' }).click();
   await page.getByRole('button', { name: 'Usuń dane', exact: true }).click();
   await page.reload();
-  await expect(page.getByRole('heading', { name: /Cześć, odkrywco/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Cześć, Test!/ })).toBeVisible();
 });
 
 test('PWA assets and worker stay inside the deployment path', async ({ page, request }) => {
