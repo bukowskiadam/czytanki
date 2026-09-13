@@ -9,25 +9,31 @@ import {
 } from './profiles';
 
 describe('separate child profiles', () => {
-  it('migrates every existing setting and progress field into the first profile', () => {
-    const legacy = completeLesson(structuredClone(defaultProgress), '1-1', ['1-1-0']);
-    legacy.favorites = ['1-1-0'];
-    legacy.settings = {
+  it('restores every setting and progress field from the profile store', () => {
+    const progress = completeLesson(structuredClone(defaultProgress), '1-1', ['1-1-0']);
+    progress.favorites = ['1-1-0'];
+    progress.settings = {
       name: 'Maja',
       dailyGoal: 12,
       speechRate: 0.65,
       uppercase: true,
       largeText: true,
     };
-    const store = parseProfiles(null, JSON.stringify(legacy));
-    expect(store.profiles).toEqual([{ id: store.activeProfileId, progress: legacy }]);
-    expect(parseProfiles(JSON.stringify(store), JSON.stringify(defaultProgress))).toEqual(store);
+    const store = {
+      version: 1,
+      activeProfileId: 'maja',
+      profiles: [{ id: 'maja', progress }],
+    };
+    expect(parseProfiles(JSON.stringify(store))).toEqual(store);
   });
-  it('does not resurrect legacy progress after a reset', () => {
-    const store = parseProfiles(null, null);
-    expect(parseProfiles(JSON.stringify(store), JSON.stringify({ earnedStars: 99 }))).toEqual(
+  it('starts with fresh independent progress when no valid profile store exists', () => {
+    const store = parseProfiles(null);
+    expect(store.profiles).toEqual([{ id: store.activeProfileId, progress: defaultProgress }]);
+    expect(parseProfiles(JSON.stringify({ earnedStars: 99, settings: { name: 'Old' } }))).toEqual(
       store,
     );
+    store.profiles[0].progress.favorites.push('1-1-0');
+    expect(parseProfiles(null).profiles[0].progress.favorites).toEqual([]);
   });
   it('keeps new profiles independent, even when names are the same', () => {
     const a = createProfile(' Maja ');
@@ -64,7 +70,7 @@ describe('separate child profiles', () => {
   });
   it('recovers malformed data, deduplicates ids and validates each progress object', () => {
     for (const raw of [null, '', 'bad json', 'null', '12', '{"profiles":[]}']) {
-      expect(parseProfiles(raw, null).profiles).toHaveLength(1);
+      expect(parseProfiles(raw).profiles).toHaveLength(1);
     }
     const store = parseProfiles(
       JSON.stringify({
@@ -78,7 +84,6 @@ describe('separate child profiles', () => {
           { id: 'a', progress: { earnedStars: 9 } },
         ],
       }),
-      null,
     );
     expect(store.activeProfileId).toBe('a');
     expect(store.profiles).toEqual([{ id: 'a', progress: defaultProgress }]);

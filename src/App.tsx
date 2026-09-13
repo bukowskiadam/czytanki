@@ -2,6 +2,8 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { useProfiles } from './useProfiles';
 import { profileName } from './profiles';
 import { ProfileManager } from './components/ProfileManager';
+import { ReleaseHistory } from './components/ReleaseHistory';
+import { APP_VERSION, hasNewVersion } from './releases';
 import { polishPlural, cardCount } from './format';
 import { allCards, allLessons, levels, type Level, type ReadingCard } from './data';
 import {
@@ -36,6 +38,7 @@ const pageTitles = {
 export default function App() {
   const [page, setPage] = useState<Page>('home');
   const {
+    previousVersion,
     profiles,
     activeProfile,
     progress,
@@ -46,6 +49,9 @@ export default function App() {
     deleteProfile,
     resetProgress,
   } = useProfiles();
+  const [releaseHistory, setReleaseHistory] = useState<'all' | 'updates' | null>(() =>
+    hasNewVersion(previousVersion) ? 'updates' : null,
+  );
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
@@ -437,6 +443,14 @@ export default function App() {
             <span>
               <Icon name="sprout" size={16} /> Małe kroki budują wielkie historie.
             </span>
+            <button
+              className="release-history-button"
+              onClick={() => setReleaseHistory('all')}
+              aria-haspopup="dialog"
+            >
+              <span>Wersja v{APP_VERSION}</span>
+              <span>Historia zmian</span>
+            </button>
             <button onClick={() => void install()}>
               <Icon name="download" size={15} /> Zainstaluj Czytanki
             </button>
@@ -467,6 +481,12 @@ export default function App() {
           </button>
         ))}
       </nav>
+      {releaseHistory && (
+        <ReleaseHistory
+          previousVersion={releaseHistory === 'updates' ? previousVersion : undefined}
+          onClose={() => setReleaseHistory(null)}
+        />
+      )}
       {selectedLevel && (
         <Dialog title={selectedLevel.title} onClose={() => setSelectedLevel(null)} wide>
           <div className={`level-dialog-intro ${selectedLevel.color}`}>

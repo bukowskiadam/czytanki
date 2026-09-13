@@ -1,27 +1,10 @@
 # Child profiles
 
-## Scope and delivery plan
-
-Profiles are local to one browser installation. Each profile has its own stars,
-completed lessons, read cards, activity, favorites and reading settings. The app
-remembers the last selected child after a reload. A profile has a stable random ID;
-renaming a child does not change the owner of their progress. Names may repeat.
-
-1. Inspect the other active task and current storage before editing.
-2. Develop on `codex/child-profiles` in a separate Git worktree. The concurrent
-   typography task owns `src/styles.css`; profile styles live in
-   `src/components/ProfileManager.css` and reuse the typography variables.
-3. Implement and test the storage model and migration independently in
-   `src/profiles.ts`, `src/useProfiles.ts` and `src/profiles.test.ts`.
-4. Add profile management in a dedicated component and a small integration in
-   `src/App.tsx`. Keep the existing reading component and curriculum unchanged.
-5. Run browser checks on port 4193 in the isolated worktree, avoiding the other
-   task's preview and test servers. New browser coverage lives in
-   `tests/profiles.spec.ts`; the existing reset assertion is updated to preserve
-   the child's name.
-6. Once the typography task is complete and its checkout is clean, combine its
-   committed changes with the profile branch. Resolve any overlap in `App.tsx`
-   by preserving both features, then test the combined result before integration.
+Profiles are included in the initial v1.0.0 and are local to one browser installation.
+Each profile has its own stars, completed lessons, read cards, activity, favorites
+and reading settings. The app remembers the last selected child after a reload.
+A profile has a stable random ID; renaming does not change the owner of the progress.
+Names may repeat.
 
 ## Behavior
 
@@ -36,35 +19,43 @@ selects the first remaining profile. The last profile cannot be deleted; its
 progress can be reset. Reset clears only the selected child's learning data and
 favorites, retaining their name and reading settings.
 
-## Persistence and migration
+## Persistence
 
 `czytanki-profiles-v1` stores a versioned object with `activeProfileId` and a list
-of `{ id, progress }` records. `Progress` retains the existing schema and validation.
-The first load imports `czytanki-progress-v1` into a single initial profile, including
-its nickname and every progress/setting field. The old key is removed only after
-saving the new object succeeds. A valid new store always takes precedence over
-legacy data. Malformed values are sanitized, duplicate IDs ignored, and a missing
-active ID falls back to the first valid profile.
+of `{ id, progress }` records. `Progress` contains learning data and reading settings,
+validated when loaded. Malformed values are sanitized, duplicate IDs ignored, and
+an unknown active ID falls back to the first valid profile. Missing, invalid or
+empty profile storage creates one empty profile with default settings.
+
+The app reads and writes only the profile store. It does not import or remove the
+experimental single-child data format used during development before profiles.
 
 Storage failures remain visible and the application continues in memory. Clearing
-browser data removes profiles. No accounts, server storage, device synchronization
-or synchronization of simultaneous editing in multiple tabs is included.
+browser data removes profiles. There are no accounts, server storage, device
+synchronization or synchronization of simultaneous editing in multiple tabs.
+
+The store also accepts optional `lastLaunchedVersion` metadata shared by all profiles.
+Each app launch records the package version and uses the previously loaded value to
+decide whether to show new release notes. Data without this field loads normally.
+Switching, adding, deleting or resetting a child retains this shared metadata.
+
+## Implementation
+
+- `src/profiles.ts`: profile creation, validation, loading and updates.
+- `src/useProfiles.ts`: active profile, persistence, launch metadata and reading updates.
+- `src/components/ProfileManager.tsx`: profile selection, creation and deletion.
+- `src/App.tsx`: integration with reading, settings, rename and reset flows.
 
 ## Acceptance checks
 
-- Existing data migrates once without loss; failed migration retains legacy data.
+- A fresh installation starts with one empty profile and default reading settings.
+- Existing profile data restores settings and progress; obsolete single-child data is ignored.
 - Two children can practice independently, switch, reload and recover their own
   stars, lessons, favorites and settings.
 - Renaming preserves profile identity. Reset/deletion affects only its target.
 - Destructive actions can be canceled, and the final profile remains available.
 - Empty new names are rejected; long names fit phone and tablet layouts.
-- Profile controls pass accessibility checks and the existing reading/offline
-  regression suite continues to pass.
+- Failed writes preserve saved profile data and allow reading to continue in memory.
+- Profile controls pass accessibility checks and the reading/offline regression suite.
 
-## Verification result
-
-The profile branch was combined with typography commit `5c58af0` without conflicts.
-The combined build passed 16 unit tests and 36 browser tests across desktop and
-mobile, including migration failure, data isolation, keyboard focus, accessibility,
-offline reopening and layouts from 320 px. Screenshots at 390 px and 593 px were
-visually checked. The typography task completed before updating the main checkout.
+Current verification results are recorded in [QA.md](QA.md).

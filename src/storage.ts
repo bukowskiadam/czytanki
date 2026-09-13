@@ -13,7 +13,6 @@ export type Progress = {
   activity: Record<string, number>;
   settings: Settings;
 };
-export const STORAGE_KEY = 'czytanki-progress-v1';
 export const defaultProgress: Progress = {
   earnedStars: 0,
   completed: [],

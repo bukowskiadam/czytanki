@@ -1,8 +1,14 @@
-import { defaultProgress, parseProgress, STORAGE_KEY, type Progress } from './storage';
+import { defaultProgress, parseProgress, type Progress } from './storage';
+import { isAppVersion } from './releases';
 
 export const PROFILES_KEY = 'czytanki-profiles-v1';
 export type ChildProfile = { id: string; progress: Progress };
-export type ProfileStore = { version: 1; activeProfileId: string; profiles: ChildProfile[] };
+export type ProfileStore = {
+  version: 1;
+  activeProfileId: string;
+  profiles: ChildProfile[];
+  lastLaunchedVersion?: string;
+};
 export const profileName = (profile: ChildProfile) =>
   profile.progress.settings.name.trim() || 'Odkrywca';
 
@@ -23,7 +29,7 @@ export function createProfile(name = '', id = profileId()): ChildProfile {
   return { id, progress };
 }
 
-export function parseProfiles(raw: string | null, legacy: string | null): ProfileStore {
+export function parseProfiles(raw: string | null): ProfileStore {
   try {
     const value = JSON.parse(raw || 'null');
     if (value?.version === 1 && Array.isArray(value.profiles)) {
@@ -40,21 +46,24 @@ export function parseProfiles(raw: string | null, legacy: string | null): Profil
           version: 1,
           activeProfileId: ids.has(value.activeProfileId) ? value.activeProfileId : profiles[0].id,
           profiles,
+          ...(isAppVersion(value.lastLaunchedVersion)
+            ? { lastLaunchedVersion: value.lastLaunchedVersion }
+            : {}),
         };
       }
     }
   } catch {
-    // Recover from invalid storage using the previous single-child format.
+    // Invalid storage starts a fresh profile using the current format.
   }
-  const profile = { id: 'first-reader', progress: parseProgress(legacy) };
+  const profile = createProfile('', 'first-reader');
   return { version: 1, activeProfileId: profile.id, profiles: [profile] };
 }
 
 export function loadProfiles(): ProfileStore {
   try {
-    return parseProfiles(localStorage.getItem(PROFILES_KEY), localStorage.getItem(STORAGE_KEY));
+    return parseProfiles(localStorage.getItem(PROFILES_KEY));
   } catch {
-    return parseProfiles(null, null);
+    return parseProfiles(null);
   }
 }
 

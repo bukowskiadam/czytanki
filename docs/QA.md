@@ -1,45 +1,55 @@
 # Release verification
 
-Verified on 2026-09-12.
+This file records verification results. The change history lives in
+[CHANGELOG.md](../CHANGELOG.md); future changes go into its **Unreleased** section.
+For release steps, follow [RELEASE.md](RELEASE.md).
 
-- Production TypeScript check and Vite build: passed.
-- Unit tests: 10 passed (curriculum integrity, progressive text length, storage recovery, repeated practice, local-date boundaries, streaks, lasting badges and Polish plural forms).
-- End-to-end tests: 26 passed, 13 scenarios each in desktop Chromium and mobile Chromium emulating an iPhone 13 viewport.
-- Automated axe checks: no WCAG 2 A/AA or 2.1 AA violations detected on the dashboard, level overview, library, progress, parent settings and reading card after transitions finish.
-- Responsive checks: no horizontal overflow at 320, 390, 768, 1024 and 1440 pixels; hero headings stay inside their cards.
-- Offline check: installed service worker reopened the production app without a connection and loaded a previously unvisited level.
-- Visual review: desktop dashboard, portrait tablet at 820 × 1180, phone at 390 × 844 and phone reading card inspected in the in-app browser.
-- Formatting: Prettier check passed.
-- Dependency audit at installation: 0 reported vulnerabilities.
+## v1.0.0 — release verification — 2026-09-13
 
-## Fixes found during verification
+All development work is consolidated into the initial v1.0.0, including profiles,
+typography and the in-app release history. Package metadata and the UI history use
+`1.0.0`. The following checks validate the release contents before tagging.
+Deployment status is recorded by the GitHub Actions run for the release commit.
 
-- Prevented the phone hero headline from clipping.
-- Increased supporting-text and button contrast.
-- Made single-card practice offer three distinct recognition choices.
-- Fixed offline asset lookup when a static server includes a `Vary: Origin` header. Cached assets are public and identical for every same-origin request.
-- Kept earned streak badges after a later break in reading.
-- Added Polish count forms for cards and stars.
+- Unit tests: 21 passed. Coverage includes curriculum integrity, progressive text
+  length, data validation, repeated practice, local-date boundaries, streaks,
+  lasting badges, Polish count forms and profile isolation.
+- Release tests validate SemVer precedence, prereleases, optional launch metadata
+  and agreement between package metadata, changelog and user-facing notes.
+  Skipped and future releases are exercised with synthetic unit-test fixtures.
+- Browser tests: 50 passed in desktop Chromium and mobile Chromium emulating iPhone 13,
+  using `VITE_BASE_PATH=/czytanki/`. The test run includes the production TypeScript
+  check and Vite/service-worker build.
+- Reading coverage includes sessions, all levels, search, favorites, recognition
+  retries, settings, speech requests, reset confirmation and storage failures.
+- Profile coverage verifies a fresh empty profile, saved settings and progress,
+  independent children after switching/reloading, renaming, deletion confirmation,
+  last-profile protection and failed writes without loss of stored profiles.
+- An explicit browser regression checks that the obsolete single-child storage key
+  is neither read nor removed, and that current profiles still persist normally.
+- The footer shows v1.0.0 and opens the single consolidated history on all four main
+  pages. A simulated earlier prerelease triggers the update dialog once; repeated
+  launches, rollbacks and invalid/missing version metadata do not trigger it.
+- Full history, update notifications and previously unvisited reading levels work
+  after reopening offline. PWA assets and service-worker scope stay under `/czytanki/`.
+- Automated axe checks found no WCAG 2 A/AA or 2.1 AA violations on the covered main
+  views, reading controls, profiles and release history. Keyboard focus trapping,
+  restoration and dialog closing controls passed.
+- Responsive checks cover widths from 320 to 1440 px with no horizontal overflow.
+  The history dialog was checked at 320, 390, 593, 768 and 1440 px.
+- Screenshots of the consolidated history at 1440 px and 390 px were visually reviewed.
+  Text wraps within the scrollable dialog and only v1.0.0 is listed.
+- Formatting, local documentation links, package/lockfile version agreement and
+  `git diff --check` passed.
 
 ## Practical boundaries
 
-Browser emulation does not replace testing on every physical phone or tablet. Polish speech requests are tested with a controlled speech adapter; the voice quality and offline availability depend on the user's operating system and installed Polish voice. Offline installation requires HTTPS or localhost and an initial successful online load. Progress belongs to one browser and is not synchronized across devices.
+Browser emulation does not replace testing on physical devices. Polish speech requests
+use a controlled speech adapter in tests; voice quality and offline availability depend
+on the operating system and installed voices. Offline installation requires HTTPS or
+localhost and an initial successful online load.
 
-## GitHub Pages deployment
-
-- Remote: `git@github.com:bukowskiadam/czytanki.git`; default branch: `master`.
-- Pages URL: https://bukowskiadam.github.io/czytanki/.
-- Pages publishing source: GitHub Actions.
-- Added deployment-path coverage for the manifest, icons, application scope and service worker URL.
-- The complete 28-test browser suite passes with `VITE_BASE_PATH=/czytanki/`, including reopening offline on both desktop and mobile.
-- Unit tests: 10 passed. Formatting check passed.
-- The workflow validates the actual Pages base path before uploading the production artifact.
-
-## Readability update — 2026-09-13
-
-- Introduced a shared rem-based type scale: body copy and primary controls at 18px, secondary controls at 16px, and captions at least 14px with default browser settings.
-- Enlarged typography across navigation, level cards, the library, progress, reading sessions and parent settings.
-- Reflowed the hero illustration and cards to accommodate larger text; narrow phones show one card per row and portrait tablets use bottom navigation.
-- Changed the pace message into plain supporting text without a filled pill.
-- Manually reviewed the dashboard at 390, 593 and 1440px, phone settings and library, and progress at 320px. The narrow weekly chart scrolls within its panel.
-- Production build, formatting and all 28 existing browser tests passed, including responsive layout, accessibility, offline use and reading flows.
+Profiles and the last launched version are local to this browser and are not synchronized
+across devices. If storage cannot be written, reading continues with a notice, and the
+update dialog may reappear on a later launch because the version could not be saved.
+Deployment is performed by GitHub Actions after the release commit is pushed to `master`.

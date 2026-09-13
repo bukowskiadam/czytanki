@@ -13,28 +13,33 @@ async function addChild(page: Page, name: string) {
 const stored = (page: Page) =>
   page.evaluate(() => JSON.parse(localStorage.getItem('czytanki-profiles-v1')!));
 
-test('migrates old data once and keeps learning, favorites and settings separate after switching and reloading', async ({
+test('restores saved profiles and keeps learning, favorites and settings separate after switching and reloading', async ({
   page,
 }) => {
   await page.goto('./');
   await page.evaluate(() => {
-    localStorage.removeItem('czytanki-profiles-v1');
-    localStorage.setItem(
-      'czytanki-progress-v1',
-      JSON.stringify({
-        earnedStars: 9,
-        completed: ['1-1'],
-        readCards: ['1-1-0'],
-        favorites: ['1-1-0'],
-        activity: { '2026-09-12': 6 },
-        settings: { name: 'Maja', uppercase: true, dailyGoal: 12, speechRate: 0.65 },
-      }),
-    );
+    const store = JSON.parse(localStorage.getItem('czytanki-profiles-v1')!);
+    const progress = store.profiles[0].progress;
+    store.profiles[0].progress = {
+      ...progress,
+      earnedStars: 9,
+      completed: ['1-1'],
+      readCards: ['1-1-0'],
+      favorites: ['1-1-0'],
+      activity: { '2026-09-12': 6 },
+      settings: {
+        ...progress.settings,
+        name: 'Maja',
+        uppercase: true,
+        dailyGoal: 12,
+        speechRate: 0.65,
+      },
+    };
+    localStorage.setItem('czytanki-profiles-v1', JSON.stringify(store));
   });
   await page.reload();
   await expect(page.locator('.stat-chip.stars strong')).toHaveText('9');
   const original = (await stored(page)).profiles[0];
-  expect(await page.evaluate(() => localStorage.getItem('czytanki-progress-v1'))).toBeNull();
   await openProfiles(page);
   await addChild(page, 'Jan');
   await expect(page.getByRole('switch', { name: 'Wielkie litery', exact: true })).toHaveAttribute(
@@ -134,17 +139,17 @@ test('profile management stays accessible with long names at narrow widths', asy
   }
 });
 
-test('failed migration retains old data and reports that changes cannot be saved', async ({
+test('failed writes retain saved profiles and report that changes cannot be saved', async ({
   page,
 }) => {
   await page.goto('./');
   await page.evaluate(() => {
-    localStorage.removeItem('czytanki-profiles-v1');
-    localStorage.setItem(
-      'czytanki-progress-v1',
-      JSON.stringify({ earnedStars: 12, settings: { name: 'Maja' } }),
-    );
+    const store = JSON.parse(localStorage.getItem('czytanki-profiles-v1')!);
+    store.profiles[0].progress.earnedStars = 12;
+    store.profiles[0].progress.settings.name = 'Maja';
+    localStorage.setItem('czytanki-profiles-v1', JSON.stringify(store));
   });
+  const before = await stored(page);
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
       throw new DOMException('Test quota', 'QuotaExceededError');
@@ -153,13 +158,42 @@ test('failed migration retains old data and reports that changes cannot be saved
   await page.reload();
   await expect(page.getByRole('status')).toContainText('Postęp nie może zostać zapisany');
   await expect(page.locator('.stat-chip.stars strong')).toHaveText('12');
-  expect(
-    await page.evaluate(
-      () => JSON.parse(localStorage.getItem('czytanki-progress-v1')!).earnedStars,
-    ),
-  ).toBe(12);
+  expect(await stored(page)).toEqual(before);
   await openProfiles(page);
   await addChild(page, 'Jan');
   await closeProfiles(page);
   await expect(page.locator('.current-reader')).toContainText('Jan');
+  expect(await stored(page)).toEqual(before);
+});
+
+test('starts a fresh profile without reading or removing obsolete single-child data', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      'czytanki-progress-v1',
+      JSON.stringify({ earnedStars: 99, settings: { name: 'Old' } }),
+    );
+    const getItem = Storage.prototype.getItem;
+    const removeItem = Storage.prototype.removeItem;
+    Storage.prototype.getItem = function (key) {
+      if (key === 'czytanki-progress-v1') throw new Error('Obsolete storage read');
+      return getItem.call(this, key);
+    };
+    Storage.prototype.removeItem = function (key) {
+      if (key === 'czytanki-progress-v1') throw new Error('Obsolete storage removal');
+      return removeItem.call(this, key);
+    };
+  });
+  await page.goto('./');
+  await expect(page.locator('.stat-chip.stars strong')).toHaveText('0');
+  await expect(page.getByRole('heading', { name: /Cześć, odkrywco/ })).toBeVisible();
+  await expect(page.getByRole('status')).toHaveCount(0);
+  expect((await stored(page)).profiles).toHaveLength(1);
+  await openProfiles(page);
+  await page.getByLabel('Imię lub pseudonim odkrywcy').fill('Maja');
+  await closeProfiles(page);
+  await page.reload();
+  await expect(page.getByRole('heading', { name: /Cześć, Maja/ })).toBeVisible();
+  await expect(page.getByRole('status')).toHaveCount(0);
 });

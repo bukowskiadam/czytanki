@@ -2,6 +2,26 @@
 
 A Polish reading companion for children and caregivers, designed for phones and tablets. React, TypeScript and Vite; English source code, Polish interface and learning content.
 
+## Change history and releases
+
+See [CHANGELOG.md](CHANGELOG.md) for released versions, starting with v1.0.0,
+and pending changes in **Unreleased**. All changes must follow [AGENTS.md](AGENTS.md); version selection
+and release steps are documented in [docs/RELEASE.md](docs/RELEASE.md).
+The repository changelog is entirely in English; user-facing release titles, notes
+and history controls remain in Polish.
+
+The application footer shows the version from `package.json` and opens a Polish,
+user-facing release history bundled in `src/release-notes.json`, also available offline.
+It lists released versions; **Unreleased** stays in the repository changelog.
+The shared browser state records `lastLaunchedVersion` alongside the profiles. The
+first launch (including existing data without version metadata) establishes a baseline
+without a popup. Launching a newer version shows all releases since the previous visit
+once, then records the current version. Reopening the same version, switching children,
+resetting a child's progress or running an older version does not trigger the popup.
+Version comparison follows SemVer, including prereleases and ignoring build metadata.
+If browser storage cannot be written, reading still works and the existing storage notice
+appears; the update popup can appear again on the next launch until saving succeeds.
+
 ## Run locally
 
 Requires Node.js 22.12+ (or a supported newer LTS) and npm.
@@ -60,7 +80,7 @@ Workflow details follow the [GitHub Pages documentation](https://docs.github.com
 - Parent settings: add/switch/rename/delete child profiles, large text, uppercase text, voice speed and per-child progress reset confirmation.
 - Responsive navigation, keyboard focus management, reduced-motion support and installable PWA assets.
 
-There are no accounts, advertisements, analytics or remote data storage. Profiles, nicknames, settings and progress stay in local browser storage under `czytanki-profiles-v1`. Existing single-child progress is migrated automatically. Clearing browser data removes them. Private browsing or a full storage quota can prevent persistence; the app shows a notice and remains usable. Different browsers and devices keep separate progress.
+There are no accounts, advertisements, analytics or remote data storage. Profiles, nicknames, settings and progress stay in local browser storage under `czytanki-profiles-v1`. A new installation starts with one empty child profile. Clearing browser data removes them. Private browsing or a full storage quota can prevent persistence; the app shows a notice and remains usable. Different browsers and devices keep separate progress.
 
 ## Checks
 
@@ -86,7 +106,7 @@ npm run icons   # Regenerate PNG app icons from the original SVG
 - `src/components/Illustrations.tsx`: original vector illustrations and Leo the fox.
 - `src/data.ts`: the Polish curriculum; add cards and lessons here.
 - `src/storage.ts`: validated progress and progress calculations.
-- `src/profiles.ts`, `src/useProfiles.ts`: child profiles, migration and persistence.
+- `src/profiles.ts`, `src/useProfiles.ts`: child profiles, validation and persistence.
 - `src/components/ProfileManager.tsx`: profile selection and management.
 - `docs/PROFILES.md`: profile behavior, acceptance checks and integration plan.
 - `src/styles.css`: responsive design and reading typography.

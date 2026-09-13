@@ -1,22 +1,30 @@
 import { useEffect, useState, type SetStateAction } from 'react';
-import { defaultProgress, STORAGE_KEY, type Progress } from './storage';
+import { defaultProgress, type Progress } from './storage';
+import { APP_VERSION } from './releases';
 import {
   createProfile,
   loadProfiles,
   PROFILES_KEY,
   removeProfile,
   updateProfile,
+  type ProfileStore,
 } from './profiles';
 
 export function useProfiles() {
-  const [store, setStore] = useState(loadProfiles);
+  // Snapshot before persisting the current version, also under React StrictMode.
+  const [launch] = useState(() => {
+    const loaded = loadProfiles();
+    return {
+      previousVersion: loaded.lastLaunchedVersion,
+      store: { ...loaded, lastLaunchedVersion: APP_VERSION },
+    };
+  });
+  const [store, setStore] = useState<ProfileStore>(launch.store);
   const [storageError, setStorageError] = useState(false);
   const activeProfile = store.profiles.find((profile) => profile.id === store.activeProfileId)!;
   useEffect(() => {
     try {
       localStorage.setItem(PROFILES_KEY, JSON.stringify(store));
-      // Only retire the old data after the complete migrated store is saved.
-      localStorage.removeItem(STORAGE_KEY);
       setStorageError(false);
     } catch {
       setStorageError(true);
@@ -31,6 +39,7 @@ export function useProfiles() {
       ),
     );
   return {
+    previousVersion: launch.previousVersion,
     profiles: store.profiles,
     activeProfile,
     progress: activeProfile.progress,
